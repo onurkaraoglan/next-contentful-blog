@@ -1,16 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --fg: #000;
+  --fghover: #434b54;
+  --bg: #fff;
+  --navbg: #fcfcfc;
+  --codebg: #fafafa;
+  --footerbg: #fcfcfc;
+  --cardshadow: rgba(0, 0, 0, 0.2);
+  --cardborder: #eaeaea;
+}
+
+[data-theme="dark"] {
+  --fg: #fff;
+  --fghover: #57616d;
+  --bg: #0d1117;
+  --navbg: #161b22;
+  --codebg: #161b22;
+  --footerbg: #161b22;
+  --cardshadow: rgba(45, 45, 45, 0.2);
+  --cardborder: #161b22;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
+  min-height: 100%;
+}
+
+html {
+  position: relative;
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  margin-bottom: 170px;
+}
+
+@media (max-width: 450px) {
+  body {
+    margin-bottom: 400px;
+  }
+}
+
+select {
+  font-size: 24px;
 }
 
 a {
-  color: inherit;
+  color: var(--fg);
   text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
 }
