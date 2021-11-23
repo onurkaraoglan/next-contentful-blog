@@ -179,6 +179,7 @@
   background: transparent;
   position: absolute;
   bottom: 15px;
+  text-align: center;
 }
 
 .btn:hover {

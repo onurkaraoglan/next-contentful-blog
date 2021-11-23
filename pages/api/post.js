@@ -16,4 +16,12 @@ export async function fetchEntries() {
   console.log(`Error getting Entries for ${contentType.name}.`);
 }
 
+export async function fetchEntry(id) {
+  const entry = await client.getEntry(id);
+  if (entry) {
+    return entry;
+  }
+  console.log(`Error getting Entries for ${contentType.name}.`);
+}
+
 // export default { fetchEntries };
