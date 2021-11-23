@@ -49,18 +49,8 @@ const Footer = () => (
             rel="noopener noreferrer"
           >
             medium
-            {/* <Icon
-              className="footericon"
-              type="medium"
-              style={{ fontSize: "20px", color: "#6f6b6b" }}
-            /> */}
           </a>
         </li>
-        {/* <li className="footerli">
-          <a href="https://www.instagram.com/okaraoglann/" target="_blank" rel="noopener noreferrer">
-            <Icon className="footericon" type="instagram" style={{ fontSize: '20px', color: '#6f6b6b' }} />
-          </a>
-        </li> */}
       </ul>
     </div>
     <div className="links">

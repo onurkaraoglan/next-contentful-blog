@@ -16,4 +16,4 @@ export async function fetchEntries() {
   console.log(`Error getting Entries for ${contentType.name}.`);
 }
 
-export default { fetchEntries };
+// export default { fetchEntries };
