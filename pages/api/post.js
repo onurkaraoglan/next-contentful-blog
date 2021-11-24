@@ -10,7 +10,7 @@ export async function fetchEntries() {
   const entries = await client.getEntries({
     content_type: "blog",
     select:
-      "fields.title,fields.description,fields.date,fields.tags,fields.image",
+      "fields.title,fields.description,fields.date,fields.tags,fields.image,metadata.tags",
   });
   if (entries.items) return entries.items;
   console.log(`Error getting Entries for ${contentType.name}.`);
@@ -24,4 +24,10 @@ export async function fetchEntry(id) {
   console.log(`Error getting Entries for ${contentType.name}.`);
 }
 
-// export default { fetchEntries };
+export async function fetchTags() {
+  const entry = await client.getTags();
+  if (entry) {
+    return entry;
+  }
+  console.log(`Error getting Entries for ${contentType.name}.`);
+}

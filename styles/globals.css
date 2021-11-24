@@ -5,12 +5,13 @@
 :root {
   --fg: #000;
   --fghover: #434b54;
-  --bg: #fff;
+  --bg: #fafafa;
   --navbg: #fcfcfc;
   --codebg: #fafafa;
   --footerbg: #fcfcfc;
   --cardshadow: rgba(0, 0, 0, 0.2);
   --cardborder: #eaeaea;
+  --tags: #c3c3c3;
 }
 
 [data-theme="dark"] {
@@ -22,6 +23,7 @@
   --footerbg: #161b22;
   --cardshadow: rgba(45, 45, 45, 0.2);
   --cardborder: #161b22;
+  --tags: #434b54;
 }
 
 html,

@@ -1,6 +1,11 @@
 .container {
   padding: 1rem 20vw;
 }
+
+.blogcontainer {
+  padding: 1rem 30vw;
+}
+
 .main {
   min-height: 100vh;
   padding: 4rem 0;
@@ -134,8 +139,6 @@
 .card_date {
   color: var(--fg);
   font-size: 0.875rem;
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
   font-weight: 400;
 }
 
@@ -165,6 +168,16 @@
   object-fit: cover;
 }
 
+.card_bottom {
+  width: 100%;
+  position: absolute;
+  bottom: 5px;
+  text-align: center;
+  background-color: var(--codebg);
+  box-shadow: 0 -10px 20px 10px var(--codebg);
+  padding: 15px;
+}
+
 .btn {
   color: var(--fg);
   padding: 0.8rem;
@@ -173,18 +186,96 @@
   border-radius: 4px;
   font-weight: 400;
   display: block;
-  width: 90%;
   cursor: pointer;
   border: 1px solid var(--fg);
   background: transparent;
-  position: absolute;
-  bottom: 15px;
-  text-align: center;
+  margin-top: 5px;
 }
 
 .btn:hover {
   background-color: var(--fg);
   color: var(--bg);
+}
+
+.card_tags {
+  text-align: start;
+}
+
+.card_tag {
+  color: var(--fg);
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  font-weight: 400;
+  background-color: var(--tags);
+  display: inline-flex;
+  margin: 0px 5px 5px 0px;
+}
+
+.tags {
+  text-align: start;
+  display: flex;
+  justify-content: center;
+  margin: 40px 0px 0px 0px;
+}
+
+.post_tags {
+  text-align: start;
+  display: inline-flex;
+  justify-content: flex-start;
+  margin: 40px 0px 0px 0px;
+}
+
+.tag {
+  color: var(--fg);
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  font-weight: 400;
+  background-color: var(--tags);
+  display: inline-flex;
+  margin: 0px 5px 5px 0px;
+}
+
+.blogtitle {
+  margin: 1rem 0 0 0;
+  line-height: 1.15;
+  font-size: 3rem;
+}
+/* 
+.blogtitle,
+.blogdescription {
+  text-align: center;
+} */
+
+.blogdescription {
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 1400px) {
+  .container {
+    padding: 1rem 15vw;
+  }
+
+  .blogcontainer {
+    padding: 1rem 20vw;
+  }
+
+  .tags {
+    display: block;
+    text-align: center;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 1rem 8vw;
+  }
+
+  .blogcontainer {
+    padding: 1rem 10vw;
+  }
 }
 
 @media (max-width: 600px) {
@@ -196,10 +287,14 @@
   .container {
     padding: 1rem 5vw;
   }
+
+  .blogcontainer {
+    padding: 1rem 5vw;
+  }
 }
 
-@media (max-width: 900px) {
-  .container {
-    padding: 1rem 10vw;
+@media (max-width: 450px) {
+  .cards {
+    justify-content: center;
   }
 }
