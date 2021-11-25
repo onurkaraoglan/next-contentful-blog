@@ -243,6 +243,11 @@
   margin: 40px 0px 0px 0px;
 }
 
+.about_tags {
+  display: inline;
+  margin-left: 5px;
+}
+
 .post_tags {
   text-align: start;
   display: inline-flex;
