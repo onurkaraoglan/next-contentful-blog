@@ -235,6 +235,7 @@
   background-color: var(--tags);
   display: inline-flex;
   margin: 0px 5px 5px 0px;
+  cursor: pointer;
 }
 
 .blogtitle {

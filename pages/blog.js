@@ -14,6 +14,9 @@ export default function Blog({ posts, tags }) {
         </Head>
         <p className={styles.title}>Blog</p>
         <div className={styles.tags}>
+          <div key="all" className={styles.tag}>
+            All
+          </div>
           {tags &&
             tags.items.map((tag) => {
               return (
