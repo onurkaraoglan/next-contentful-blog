@@ -12,6 +12,7 @@
   --cardshadow: rgba(0, 0, 0, 0.2);
   --cardborder: #eaeaea;
   --tags: #c3c3c3;
+  --sectionborder: #c3c3c3;
 }
 
 [data-theme="dark"] {
@@ -24,6 +25,7 @@
   --cardshadow: rgba(45, 45, 45, 0.2);
   --cardborder: #161b22;
   --tags: #434b54;
+  --sectionborder: #434b54;
 }
 
 html,

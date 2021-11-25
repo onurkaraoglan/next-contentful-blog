@@ -11,6 +11,19 @@ export async function fetchEntries() {
     content_type: "blog",
     select:
       "fields.title,fields.description,fields.date,fields.tags,fields.image,metadata.tags",
+    order: "-fields.date",
+  });
+  if (entries.items) return entries.items;
+  console.log(`Error getting Entries for ${contentType.name}.`);
+}
+
+export async function fetchTopTreeEntries() {
+  const entries = await client.getEntries({
+    content_type: "blog",
+    select:
+      "fields.title,fields.description,fields.date,fields.tags,fields.image,metadata.tags",
+    order: "-fields.date",
+    limit: 3,
   });
   if (entries.items) return entries.items;
   console.log(`Error getting Entries for ${contentType.name}.`);

@@ -2,8 +2,10 @@ import Head from "next/head";
 import Layout from "../components/layout";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
+import { fetchTopTreeEntries } from "./api/post";
+import Card from "../components/card";
 
-export default function Home() {
+export default function Home({ posts }) {
   return (
     <Layout>
       <div className={styles.container}>
@@ -22,6 +24,42 @@ export default function Home() {
           to learn more about me.
         </p>
       </div>
+      <div className={styles.largecontainer}>
+        <div className={styles.section}>
+          <p className={styles.title}>Latest Posts</p>
+          <div className={styles.cards}>
+            {posts.map((post) => {
+              return (
+                posts && (
+                  <Card
+                    key={post.sys.id}
+                    date={post.fields.date}
+                    image={post.fields.image.fields}
+                    title={post.fields.title}
+                    description={post.fields.description}
+                    id={post.sys.id}
+                    metaTags={post.metadata.tags}
+                  />
+                )
+              );
+            })}
+          </div>
+          <div className={styles.section_btn}>
+            <Link href="/blog">
+              <a className={styles.btn}>All Posts</a>
+            </Link>
+          </div>
+        </div>
+      </div>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const posts = await fetchTopTreeEntries();
+  return {
+    props: {
+      posts,
+    },
+  };
 }
