@@ -1,9 +1,9 @@
 .container {
-  padding: 1rem 20vw;
+  padding: 1rem 30vw;
 }
 
 .blogcontainer {
-  padding: 1rem 30vw;
+  padding: 1rem 20vw;
 }
 
 .main {
@@ -44,17 +44,29 @@
 }
 
 .title {
-  margin: 4rem 0 0 0;
+  margin: 2rem 0;
   line-height: 1.15;
   font-size: 3rem;
 }
 
 .title,
-.description {
+.description,
+.contenttitle {
   text-align: center;
 }
 
 .description {
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
+
+.contenttitle {
+  margin: 4rem 0;
+  line-height: 1.5;
+  font-size: 2rem;
+}
+
+.content {
   line-height: 1.5;
   font-size: 1.5rem;
 }
@@ -256,11 +268,11 @@
 
 @media (max-width: 1400px) {
   .container {
-    padding: 1rem 15vw;
+    padding: 1rem 20vw;
   }
 
   .blogcontainer {
-    padding: 1rem 20vw;
+    padding: 1rem 15vw;
   }
 
   .tags {
@@ -271,11 +283,11 @@
 
 @media (max-width: 900px) {
   .container {
-    padding: 1rem 8vw;
+    padding: 1rem 10vw;
   }
 
   .blogcontainer {
-    padding: 1rem 10vw;
+    padding: 1rem 8vw;
   }
 }
 

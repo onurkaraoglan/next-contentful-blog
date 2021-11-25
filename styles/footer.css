@@ -49,10 +49,6 @@ ul.footerul {
   transform: scale(1.2);
 }
 
-.footericon svg:hover {
-  color: #0e4b7f;
-}
-
 ul.link {
   display: flex;
   flex-wrap: wrap;
@@ -95,6 +91,11 @@ ul.link {
 .icon {
   width: 1.2em;
   height: 1.2em;
+}
+
+.bigicon {
+  width: 2em;
+  height: 2em;
 }
 
 @media screen and (max-width: 900px) {
