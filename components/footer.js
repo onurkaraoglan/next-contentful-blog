@@ -10,40 +10,48 @@ export default function Footer() {
         <div className="icons">
           <ul className="footerul">
             <li className="footerli">
-              <a
-                href="https://www.linkedin.com/in/onurkaraoglan/?locale=en_US"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Linkedin className="icon" />
-              </a>
+              <Link href="https://www.linkedin.com/in/onurkaraoglan/?locale=en_US">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Linkedin"
+                >
+                  <Linkedin className="icon" />
+                </a>
+              </Link>
             </li>
             <li className="footerli">
-              <a
-                href="https://github.com/onurkaraoglan"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github className="icon" />
-              </a>
+              <Link href="https://github.com/onurkaraoglan">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Github"
+                >
+                  <Github className="icon" />
+                </a>
+              </Link>
             </li>
             <li className="footerli">
-              <a
-                href="https://medium.com/@onurkaraoglan"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Medium className="icon" />
-              </a>
+              <Link href="https://medium.com/@onurkaraoglan">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Medium"
+                >
+                  <Medium className="icon" />
+                </a>
+              </Link>
             </li>
             <li className="footerli">
-              <a
-                href="https://twitter.com/onurkaraoglan"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Twitter className="icon" />
-              </a>
+              <Link href="https://twitter.com/onurkaraoglan">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Twitter"
+                >
+                  <Twitter className="icon" />
+                </a>
+              </Link>
             </li>
           </ul>
         </div>

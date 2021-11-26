@@ -8,11 +8,11 @@ export default function Card({
   date,
   image,
   title,
-  description,
+  fieldDescription,
   id,
   metaTags,
 }) {
-  let { file, imgDescription } = image;
+  let { file, description } = image;
   const src = `https:${file.url}`;
   const tags = metaTags.map((tag) => {
     return tag.sys.id;
@@ -24,7 +24,7 @@ export default function Card({
           <Image
             loader={() => src}
             src={src}
-            alt={imgDescription}
+            alt={description}
             layout="responsive"
             height="70vh"
             width="100%"
@@ -40,7 +40,7 @@ export default function Card({
               {moment(date).format("MMM Do, YYYY")}
             </p>
             <h2 className={styles.card_title}>{title}</h2>
-            <p className={styles.card_text}>{description}</p>
+            <p className={styles.card_text}>{fieldDescription}</p>
           </div>
           <div className={styles.card_bottom}>
             <div className={styles.card_tags}>
@@ -53,7 +53,9 @@ export default function Card({
               })}
             </div>
             <Link href="/post/[id]" as={`/post/${slug(title)}-${id}`}>
-              <a className={styles.btn}>Read More</a>
+              <a className={styles.btn} aria-label={slug(title)}>
+                Read More : {title}
+              </a>
             </Link>
           </div>
         </div>

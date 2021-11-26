@@ -107,10 +107,17 @@
   justify-content: flex-start;
 }
 
+.home_cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
 .cards_item {
   display: flex;
   padding: 2rem 1rem;
-  /* align-items: center; */
   justify-content: center;
   max-width: 350px;
   min-width: 300px;
