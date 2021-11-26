@@ -77,5 +77,6 @@ export async function getStaticProps() {
       posts,
       tags,
     },
+    revalidate: 300,
   };
 }
