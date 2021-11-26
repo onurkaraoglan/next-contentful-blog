@@ -104,7 +104,7 @@
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .cards_item {

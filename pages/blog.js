@@ -3,8 +3,17 @@ import Layout from "../components/layout";
 import Card from "../components/card";
 import styles from "../styles/Home.module.css";
 import { fetchEntries, fetchTags } from "./api/post";
+import { useState } from "react";
 
 export default function Blog({ posts, tags }) {
+  const [filteredPosts, setFilteredPosts] = useState(posts);
+  const filterByTag = (filteredPosts, tag) => {
+    return filteredPosts.filter((post) => {
+      return post.metadata.tags.some((t) => {
+        return t.sys.id === tag;
+      });
+    });
+  };
   return (
     <Layout>
       <div className={styles.largecontainer}>
@@ -14,34 +23,46 @@ export default function Blog({ posts, tags }) {
         </Head>
         <p className={styles.title}>Blog</p>
         <div className={styles.tags}>
-          <div key="all" className={styles.tag}>
+          <div
+            key="all"
+            className={styles.tag}
+            onClick={() => setFilteredPosts(posts)}
+          >
             All
           </div>
           {tags &&
             tags.items.map((tag) => {
               return (
-                <div key={tag.name} className={styles.tag}>
-                  {tag.name}
+                <div
+                  key={tag.name}
+                  className={styles.tag}
+                  onClick={() =>
+                    setFilteredPosts(filterByTag(posts, tag.sys.id))
+                  }
+                >
+                  {tag.sys.id}
                 </div>
               );
             })}
         </div>
-        <div className={styles.cards}>
-          {posts.map((post) => {
-            return (
-              posts && (
-                <Card
-                  key={post.sys.id}
-                  date={post.fields.date}
-                  image={post.fields.image.fields}
-                  title={post.fields.title}
-                  description={post.fields.description}
-                  id={post.sys.id}
-                  metaTags={post.metadata.tags}
-                />
-              )
-            );
-          })}
+        <div>
+          <div className={styles.cards}>
+            {filteredPosts.map((post) => {
+              return (
+                posts && (
+                  <Card
+                    key={post.sys.id}
+                    date={post.fields.date}
+                    image={post.fields.image.fields}
+                    title={post.fields.title}
+                    description={post.fields.description}
+                    id={post.sys.id}
+                    metaTags={post.metadata.tags}
+                  />
+                )
+              );
+            })}
+          </div>
         </div>
       </div>
     </Layout>

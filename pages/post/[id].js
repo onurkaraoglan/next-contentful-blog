@@ -14,7 +14,6 @@ export default function Post({ post }) {
   const tags = post.metadata.tags.map((tag) => {
     return tag.sys.id;
   });
-  console.log(tags);
   return (
     <Layout>
       <div className={styles.container}>
