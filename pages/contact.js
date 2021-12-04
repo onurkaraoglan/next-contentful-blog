@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import Layout from "../components/layout";
 import styles from "../styles/Home.module.css";
 import { Linkedin, Medium, Twitter, Github } from "react-bootstrap-icons";
@@ -22,40 +23,48 @@ export default function Contact() {
         <div className="icons">
           <ul className="footerul">
             <li className="footerli">
-              <a
-                href="https://www.linkedin.com/in/onurkaraoglan/?locale=en_US"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Linkedin className="bigicon" />
-              </a>
+              <Link href="https://www.linkedin.com/in/onurkaraoglan/?locale=en_US">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Linkedin"
+                >
+                  <Linkedin className="bigicon" />
+                </a>
+              </Link>
             </li>
             <li className="footerli">
-              <a
-                href="https://github.com/onurkaraoglan"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github className="bigicon" />
-              </a>
+              <Link href="https://github.com/onurkaraoglan">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="github"
+                >
+                  <Github className="bigicon" />
+                </a>
+              </Link>
             </li>
             <li className="footerli">
-              <a
-                href="https://medium.com/@onurkaraoglan"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Medium className="bigicon" />
-              </a>
+              <Link href="https://medium.com/@onurkaraoglan">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="medium"
+                >
+                  <Medium className="bigicon" />
+                </a>
+              </Link>
             </li>
             <li className="footerli">
-              <a
-                href="https://twitter.com/onurkaraoglan"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Twitter className="bigicon" />
-              </a>
+              <Link href="https://twitter.com/onurkaraoglan">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="twitter"
+                >
+                  <Twitter className="bigicon" />
+                </a>
+              </Link>
             </li>
           </ul>
         </div>
