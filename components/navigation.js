@@ -37,7 +37,9 @@ function Navigation() {
       <div className="logo-nav">
         <div className="logo-container">
           <Link href="/">
-            <a> Logo </a>
+            <a>
+              <img src="/images/logo.png" width="45" height="50" alt="close" />
+            </a>
           </Link>
         </div>
         <ul className={click ? "nav-options active" : "nav-options"}>
