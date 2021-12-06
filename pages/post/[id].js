@@ -14,6 +14,13 @@ export default function Post({ post }) {
   const tags = post.metadata.tags.map((tag) => {
     return tag.sys.id;
   });
+  if (typeof window !== "undefined") {
+    let codes = document.querySelectorAll("code");
+    for (let i = 0; i < codes.length; i++) {
+      codes[i].classList.add(styles.code);
+    }
+  }
+
   return (
     <Layout>
       <Head>
