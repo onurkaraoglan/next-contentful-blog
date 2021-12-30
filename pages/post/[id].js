@@ -5,21 +5,27 @@ import styles from "../../styles/Home.module.css";
 import { fetchEntry, fetchEntries } from "../api/post";
 import slug from "slug";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { MARKS } from "@contentful/rich-text-types";
+import { useEffect } from "react";
 
 export default function Post({ post }) {
+  const options = {
+    renderMark: {
+      [MARKS.CODE]: (code) => (
+        <pre className={styles.pre}>
+          <code className={styles.code}>{code}</code>
+        </pre>
+      ),
+    },
+  };
+
   const rawRichTextField = post.fields.body;
-  const body = documentToReactComponents(rawRichTextField);
+  const body = documentToReactComponents(rawRichTextField, options);
   let { file, imgDescription } = post.fields.image.fields;
   const src = `https:${file.url}`;
   const tags = post.metadata.tags.map((tag) => {
     return tag.sys.id;
   });
-  if (typeof window !== "undefined") {
-    let codes = document.querySelectorAll("code");
-    for (let i = 0; i < codes.length; i++) {
-      codes[i].classList.add(styles.code);
-    }
-  }
 
   return (
     <Layout>

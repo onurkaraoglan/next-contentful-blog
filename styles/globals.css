@@ -7,7 +7,8 @@
   --fghover: #434b54;
   --bg: #fafafa;
   --navbg: #fcfcfc;
-  --codebg: #eaeaf0;
+  --codebg: rgb(40, 44, 52);
+  --codefg: #fff;
   --footerbg: #fcfcfc;
   --cardshadow: rgba(0, 0, 0, 0.2);
   --cardborder: #eaeaea;
@@ -21,6 +22,7 @@
   --bg: #0d1117;
   --navbg: #161b22;
   --codebg: #161b22;
+  --codefg: #fff;
   --footerbg: #161b22;
   --cardshadow: rgba(45, 45, 45, 0.2);
   --cardborder: #161b22;

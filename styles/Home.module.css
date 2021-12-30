@@ -82,13 +82,19 @@
   font-size: 1.5rem;
 }
 
+.pre {
+  padding: 1.1rem;
+  background-color: var(--codebg);
+  border-radius: 10px;
+  margin: 25px -30px 25px -30px;
+  font-size: 14px;
+  line-height: 25px;
+  overflow-x: scroll;
+}
+
 .code {
-  background: var(--codebg);
-  border-radius: 5px;
-  /* padding: 0.75rem; */
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+  color: var(--codefg);
+  font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace;
 }
 
 .grid {
@@ -144,7 +150,7 @@
 
 .card_content {
   padding: 1rem;
-  background: var(--codebg);
+  background: var(--navbg);
   height: 30vh;
   min-height: 250px;
   position: relative;
@@ -204,8 +210,8 @@
   position: absolute;
   bottom: 0;
   text-align: center;
-  background-color: var(--codebg);
-  box-shadow: 0 -10px 20px 10px var(--codebg);
+  background-color: var(--navbg);
+  box-shadow: 0 -10px 20px 10px var(--navbg);
   padding: 15px;
 }
 
@@ -326,6 +332,9 @@
 }
 
 @media (max-width: 450px) {
+  .pre {
+    margin: 25px -5px 25px -5px;
+  }
   .cards {
     justify-content: center;
   }
