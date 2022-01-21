@@ -37,7 +37,7 @@ function Navigation() {
       <div className="logo-nav">
         <div className="logo-container">
           <Link href="/">
-            <a>
+            <a className="link-nav">
               <img src="/images/logo.png" width="45" height="50" alt="close" />
             </a>
           </Link>
@@ -45,17 +45,17 @@ function Navigation() {
         <ul className={click ? "nav-options active" : "nav-options"}>
           <li className="option" onClick={closeMobileMenu}>
             <Link href="/about">
-              <a> ABOUT </a>
+              <a className="link-nav"> ABOUT </a>
             </Link>
           </li>
           <li className="option" onClick={closeMobileMenu}>
             <Link href="/contact">
-              <a> CONTACT </a>
+              <a className="link-nav"> CONTACT </a>
             </Link>
           </li>
           <li className="option" onClick={closeMobileMenu}>
             <Link href="/blog">
-              <a> BLOG </a>
+              <a className="link-nav"> BLOG </a>
             </Link>
           </li>
         </ul>

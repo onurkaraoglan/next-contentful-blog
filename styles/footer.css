@@ -49,6 +49,10 @@ ul.footerul {
   transform: scale(1.2);
 }
 
+.link-footer {
+  text-decoration: none;
+}
+
 ul.link {
   display: flex;
   flex-wrap: wrap;

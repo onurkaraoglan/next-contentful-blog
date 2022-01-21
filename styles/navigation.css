@@ -33,6 +33,10 @@
   display: none;
 }
 
+.link-nav {
+  text-decoration: none;
+}
+
 .option :hover {
   color: var(--fghover);
 }

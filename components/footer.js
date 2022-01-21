@@ -59,22 +59,22 @@ export default function Footer() {
           <ul className="link">
             <li className="linkli">
               <Link href="/">
-                <a>Home</a>
+                <a className="link-footer">Home</a>
               </Link>
             </li>
             <li className="linkli">
               <Link href="/about">
-                <a>About</a>
+                <a className="link-footer">About</a>
               </Link>
             </li>
             <li className="linkli">
               <Link href="/contact">
-                <a>Contact</a>
+                <a className="link-footer">Contact</a>
               </Link>
             </li>
             <li className="linkli">
               <Link href="/blog">
-                <a>Blog</a>
+                <a className="link-footer">Blog</a>
               </Link>
             </li>
           </ul>

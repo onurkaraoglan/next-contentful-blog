@@ -7,13 +7,27 @@ import slug from "slug";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { MARKS } from "@contentful/rich-text-types";
 import { useEffect } from "react";
+import Prism from "prismjs";
+import "prismjs/components/prism-csharp";
+import "prismjs/components/prism-javascript";
+import "prismjs/plugins/line-numbers/prism-line-numbers";
 
 export default function Post({ post }) {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      Prism.highlightAll();
+    }
+  }, []);
+
+  let languages = "";
+  post.fields.languages.forEach((language) => {
+    languages = languages + `language-${language} `;
+  });
   const options = {
     renderMark: {
       [MARKS.CODE]: (code) => (
-        <pre className={styles.pre}>
-          <code className={styles.code}>{code}</code>
+        <pre className="line-numbers">
+          <code className={languages}>{code}</code>
         </pre>
       ),
     },

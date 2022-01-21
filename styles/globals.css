@@ -47,6 +47,7 @@ body {
   background: var(--bg);
   color: var(--fg);
   margin-bottom: 170px;
+  overflow-x: hidden;
 }
 
 @media (max-width: 450px) {
@@ -61,5 +62,4 @@ select {
 
 a {
   color: var(--fg);
-  text-decoration: none;
 }

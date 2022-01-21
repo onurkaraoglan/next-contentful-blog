@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes";
 import "../styles/navigation.css";
 import "../styles/footer.css";
 import "../styles/toggle.css";
+import "../styles/prism.css";
 
 function MyApp({ Component, pageProps }) {
   return (

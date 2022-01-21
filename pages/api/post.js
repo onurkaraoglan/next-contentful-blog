@@ -10,7 +10,7 @@ export async function fetchEntries() {
   const entries = await client.getEntries({
     content_type: "blog",
     select:
-      "fields.title,fields.description,fields.date,fields.tags,fields.image,metadata.tags",
+      "fields.title,fields.description,fields.date,fields.languages,fields.image,metadata.tags",
     order: "-fields.date",
   });
   if (entries.items) return entries.items;
@@ -21,7 +21,7 @@ export async function fetchTopTreeEntries() {
   const entries = await client.getEntries({
     content_type: "blog",
     select:
-      "fields.title,fields.description,fields.date,fields.tags,fields.image,metadata.tags",
+      "fields.title,fields.description,fields.date,fields.languages,fields.image,metadata.tags",
     order: "-fields.date",
     limit: 3,
   });

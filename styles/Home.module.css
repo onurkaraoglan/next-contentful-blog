@@ -227,6 +227,7 @@
   border: 1px solid var(--fg);
   background: transparent;
   margin-top: 5px;
+  text-decoration: none;
 }
 
 .btn:hover {
