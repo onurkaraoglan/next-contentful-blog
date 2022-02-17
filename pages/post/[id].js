@@ -5,7 +5,7 @@ import styles from "../../styles/Home.module.css";
 import { fetchEntry, fetchEntries } from "../api/post";
 import slug from "slug";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { MARKS } from "@contentful/rich-text-types";
+import { MARKS, BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { useEffect } from "react";
 import Prism from "prismjs";
 import "prismjs/components/prism-csharp";
@@ -30,6 +30,46 @@ export default function Post({ post }) {
           <code className={languages}>{code}</code>
         </pre>
       ),
+    },
+    renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: ({
+        data: {
+          target: { fields },
+        },
+      }) => {
+        return (
+          <img
+            src={fields.file.url}
+            width="100%"
+            height="auto"
+            alt={fields.description}
+          />
+        );
+      },
+      [INLINES.HYPERLINK]: (node) => {
+        if (node.data.uri.includes("player.vimeo.com/video")) {
+          return (
+            <iframe
+              title="Unique Title 001"
+              src={node.data.uri}
+              frameBorder="0"
+              allowFullScreen
+              className={styles.frame}
+            ></iframe>
+          );
+        } else if (node.data.uri.includes("youtube.com/embed")) {
+          return (
+            <iframe
+              title="Unique Title 002"
+              src={node.data.uri}
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+              frameBorder="0"
+              allowFullScreen
+              className={styles.frame}
+            ></iframe>
+          );
+        }
+      },
     },
   };
 

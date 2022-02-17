@@ -179,6 +179,11 @@
   font-weight: 400;
 }
 
+.frame {
+  width: 100%;
+  height: 50vh;
+}
+
 @media (min-width: 40rem) {
   .cards_item {
     width: 50%;
