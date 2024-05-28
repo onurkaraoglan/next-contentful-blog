@@ -10,47 +10,39 @@ export default function Footer() {
         <div className="icons">
           <ul className="footerul">
             <li className="footerli">
-              <Link href="https://www.linkedin.com/in/onurkaraoglan/?locale=en_US">
-                <a
+              <Link href="https://www.linkedin.com/in/onurkaraoglan/?locale=en_US"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Linkedin"
                 >
                   <Linkedin className="icon" />
-                </a>
               </Link>
             </li>
             <li className="footerli">
-              <Link href="https://github.com/onurkaraoglan">
-                <a
+              <Link href="https://github.com/onurkaraoglan"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Github"
                 >
                   <Github className="icon" />
-                </a>
               </Link>
             </li>
             <li className="footerli">
-              <Link href="https://medium.com/@onurkaraoglan">
-                <a
+              <Link href="https://medium.com/@onurkaraoglan"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Medium"
                 >
                   <Medium className="icon" />
-                </a>
               </Link>
             </li>
             <li className="footerli">
-              <Link href="https://twitter.com/onurkaraoglan">
-                <a
+              <Link href="https://twitter.com/onurkaraoglan"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Twitter"
                 >
                   <Twitter className="icon" />
-                </a>
               </Link>
             </li>
           </ul>
@@ -58,23 +50,19 @@ export default function Footer() {
         <div className="links">
           <ul className="link">
             <li className="linkli">
-              <Link href="/">
-                <a className="link-footer">Home</a>
+              <Link href="/"className="link-footer">Home
               </Link>
             </li>
             <li className="linkli">
-              <Link href="/about">
-                <a className="link-footer">About</a>
+              <Link href="/about"className="link-footer">About
               </Link>
             </li>
             <li className="linkli">
-              <Link href="/contact">
-                <a className="link-footer">Contact</a>
+              <Link href="/contact"className="link-footer">Contact
               </Link>
             </li>
             <li className="linkli">
-              <Link href="/blog">
-                <a className="link-footer">Blog</a>
+              <Link href="/blog"className="link-footer">Blog
               </Link>
             </li>
           </ul>
