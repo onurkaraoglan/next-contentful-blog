@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "@blog/styles/Home.module.css";
 import slug from "slug";
-import moment from "moment";
+import dayjs from "dayjs";
 
 export default function Card({
   date,
@@ -35,7 +35,7 @@ export default function Card({
           <div className={styles.card_content}>
             <p className={styles.card_date}>
               {/* {date.substring(0, 10)} */}
-              {moment(date).format("MMM Do, YYYY")}
+              {dayjs(date).format("MMM Do, YYYY")}
             </p>
             <h2 className={styles.card_title}>{title}</h2>
             <p className={styles.card_text}>{fieldDescription}</p>
