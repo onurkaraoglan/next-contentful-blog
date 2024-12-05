@@ -1,6 +1,7 @@
-import Navigation from "./navigation";
-import Footer from "./footer";
+
+import Footer from "./Footer";
 import Head from "next/head";
+import Navigation from "./Navigation";
 
 function Layout({ children }) {
   if (typeof window !== "undefined") {

@@ -1,5 +1,4 @@
-const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
-const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
+import { accessToken, space } from "./keys";
 
 const client = require("contentful").createClient({
   space: space,
@@ -14,7 +13,6 @@ export async function fetchEntries() {
     order: "-fields.date",
   });
   if (entries.items) return entries.items;
-  console.log(`Error getting Entries for ${contentType.name}.`);
 }
 
 export async function fetchTopTreeEntries() {
@@ -26,15 +24,16 @@ export async function fetchTopTreeEntries() {
     limit: 3,
   });
   if (entries.items) return entries.items;
-  console.log(`Error getting Entries for ${contentType.name}.`);
 }
 
 export async function fetchEntry(id) {
-  const entry = await client.getEntry(id);
-  if (entry) {
+  try {
+    const entry = await client.getEntry(id);
     return entry;
+  } catch (error) {
+    console.error(`Error fetching entry with id ${id}:`, error);
+    throw new Error('The resource could not be found.');
   }
-  console.log(`Error getting Entries for ${contentType.name}.`);
 }
 
 export async function fetchTags() {
@@ -42,5 +41,4 @@ export async function fetchTags() {
   if (entry) {
     return entry;
   }
-  console.log(`Error getting Entries for ${contentType.name}.`);
 }

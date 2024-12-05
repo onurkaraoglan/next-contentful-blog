@@ -1,6 +1,5 @@
-import Head from "next/head";
-import Layout from "../components/layout";
-import styles from "../styles/Home.module.css";
+
+import styles from "@blog/styles/Home.module.css";
 
 export default function About() {
   const d = new Date();
@@ -17,11 +16,6 @@ export default function About() {
     "CI/CD",
   ];
   return (
-    <Layout>
-      <Head>
-        <title>Onur - About</title>
-        <meta name="description" content="Onur Karaoğlan's simple about page" />
-      </Head>
       <div className={styles.container}>
         <p className={styles.title}>About Me</p>
         <p className={styles.content}>
@@ -56,6 +50,5 @@ export default function About() {
           </div>
         </div>
       </div>
-    </Layout>
   );
 }

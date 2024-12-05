@@ -1,8 +1,9 @@
+'use client'
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../styles/Home.module.css";
+import styles from "@blog/styles/Home.module.css";
 import slug from "slug";
-import moment from "moment";
+import dayjs from "dayjs";
 
 export default function Card({
   date,
@@ -25,19 +26,16 @@ export default function Card({
             loader={() => src}
             src={src}
             alt={description}
-            layout="responsive"
-            height="70vh"
-            width="100%"
-            objectfit="cover"
-            className={styles.img}
             unoptimized={true}
+            width={0}
+            height={0}
           />
         </div>
         <div style={{ position: "relative" }}>
           <div className={styles.card_content}>
             <p className={styles.card_date}>
               {/* {date.substring(0, 10)} */}
-              {moment(date).format("MMM Do, YYYY")}
+              {dayjs(date).format("MMM Do, YYYY")}
             </p>
             <h2 className={styles.card_title}>{title}</h2>
             <p className={styles.card_text}>{fieldDescription}</p>
@@ -52,10 +50,13 @@ export default function Card({
                 );
               })}
             </div>
-            <Link href="/post/[id]" as={`/post/${slug(title)}-${id}`}>
-              <a className={styles.btn} aria-label={slug(title)}>
-                Read More : {title}
-              </a>
+            <Link
+              href="/post/[id]"
+              as={`/post/${slug(title)}-${id}`}
+              className={styles.btn}
+              aria-label={slug(title)}
+            >
+              Read More
             </Link>
           </div>
         </div>

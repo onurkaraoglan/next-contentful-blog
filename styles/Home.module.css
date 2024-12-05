@@ -143,7 +143,7 @@
 .card:focus,
 .card:active {
   box-shadow: 0 20px 40px 0 var(--cardshadow);
-  transform: scale(1.05);
+  transform: scale(1.02);
   transition: 0.3s;
   transition-timing-function: ease;
 }
@@ -207,6 +207,17 @@
   height: 30vh;
   width: 100%;
   vertical-align: middle;
+  object-fit: cover;
+}
+
+.card_image {
+  position: relative;
+  height: 200px;
+}
+
+.card_image > img {
+  height: 200px;
+  width: 100%;
   object-fit: cover;
 }
 

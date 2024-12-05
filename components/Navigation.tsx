@@ -1,29 +1,35 @@
+'use client';
+
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 
 function Navigation() {
-  const { theme, setTheme } = useTheme("dark");
+  const { theme, setTheme } = useTheme();
   const toggleTheme = theme === "light" ? "dark" : "light";
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
   const handleTheme = () => {
-    const toggleLines = document.getElementsByClassName("line");
+    const toggleLines: HTMLCollectionOf<HTMLElement> =
+      document.getElementsByClassName("line") as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < toggleLines.length; i++) {
       if (toggleTheme === "light") {
-        toggleLines.item(i).style.display = "block";
+        toggleLines.item(i)!.style!.display = "block";
       } else {
-        toggleLines.item(i).style.display = "none";
+        toggleLines.item(i)!.style.display = "none";
       }
     }
-    const toggles = document.getElementsByClassName("toggle");
+    const toggles: HTMLCollectionOf<HTMLElement> =
+      document.getElementsByClassName(
+        "toggle"
+      ) as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < toggles.length; i++) {
       if (toggleTheme === "light") {
-        toggles.item(i).style.filter = "invert(100%)";
+        toggles.item(i)!.style.filter = "invert(100%)";
       } else {
-        toggles.item(i).style.filter = "invert(0%)";
+        toggles.item(i)!.style.filter = "invert(0%)";
       }
     }
   };
@@ -36,26 +42,21 @@ function Navigation() {
     <div className="header">
       <div className="logo-nav">
         <div className="logo-container">
-          <Link href="/">
-            <a className="link-nav">
+          <Link href="/"className="link-nav">
               <img src="/images/logo.png" width="45" height="50" alt="close" />
-            </a>
           </Link>
         </div>
         <ul className={click ? "nav-options active" : "nav-options"}>
           <li className="option" onClick={closeMobileMenu}>
-            <Link href="/about">
-              <a className="link-nav"> ABOUT </a>
+            <Link href="/about"className="link-nav"> ABOUT 
             </Link>
           </li>
           <li className="option" onClick={closeMobileMenu}>
-            <Link href="/contact">
-              <a className="link-nav"> CONTACT </a>
+            <Link href="/contact"className="link-nav"> CONTACT 
             </Link>
           </li>
           <li className="option" onClick={closeMobileMenu}>
-            <Link href="/blog">
-              <a className="link-nav"> BLOG </a>
+            <Link href="/blog"className="link-nav"> BLOG 
             </Link>
           </li>
         </ul>
