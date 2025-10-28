@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "es2015",
+    "noUnusedLocals": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "noImplicitAny": false,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "jsxImportSource": "react",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node"],
+    "strictNullChecks": true,
+    "paths": {
+      "@onur/components/*": ["./components/*"],
+      "@onur/layouts/*": ["./layouts/*"],
+      "@onur/styles/*": ["./styles/*"],
+      "@onur/lib/*": ["./lib/*"],
+      "@onur/app/*": ["./app/*"],
+      "@onur/data/*": ["./data/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
