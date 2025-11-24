@@ -96,10 +96,10 @@ export const educationHistory: ResumeWork[] = [
     startDate: "2009",
     endDate: "2013",
     description:
-      "Completed a Bachelor of Science in Computer Engineering with a focus on software engineering, algorithms, distributed systems and network programming. Gained hands-on experience through academic projects involving system design and web development.",
+      "Completed a Bachelor of Science in Computer Engineering with a focus on software engineering, algorithms and data structures. Gained hands-on experience through academic projects involving system design and programming.",
     bullets: [
-      "Focused on software engineering, distributed systems and data structures.",
-      "Completed multiple hands-on programming projects using C, C++, Java and SQL.",
+      "Focused on software engineering, algorithms and data structures.",
+      "Completed multiple hands-on programming projects using C, C++, C# and MSSQL.",
       "Actively participated in engineering events and seminars related to computer science technologies."
     ],
     tech: [],
