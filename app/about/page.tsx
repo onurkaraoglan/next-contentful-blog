@@ -77,7 +77,7 @@ export default function About() {
                 </span>{" "}
                 and a Bachelor's degree in Computer Science. I have hands-on
                 experience using various technologies like JavaScript (ES6),
-                TypeScript, React.js, React Native, Expo, and Golang to create
+                TypeScript, React.js, React Native, Expo and Golang to create
                 and implement software applications.
               </p>
               <p>
@@ -102,7 +102,7 @@ export default function About() {
                 I enjoy being challenged and engaging with projects that
                 require me to work outside of my comfort and knowledge set.
                 Continuing to learn new languages and development techniques is
-                important to me, and I believe in delivering high-quality
+                important to me and I believe in delivering high-quality
                 solutions that make a real impact.
               </p>
             </CardContent>

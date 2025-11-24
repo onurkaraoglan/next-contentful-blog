@@ -95,14 +95,14 @@ export function ResumeSection({
                                 <div className="truncate font-semibold text-left">
                                   {item.organization}
                                 </div>
-                                <div className="text-xs text-muted-foreground truncate text-left">
+                                <div className="text-sm text-foreground/70 truncate text-left">
                                   {item.roleOrDegree}
                                 </div>
                               </div>
                             </div>
                             <div className="flex items-center gap-3">
                               {date && (
-                                <div className="text-xs text-muted-foreground whitespace-nowrap">
+                                <div className="text-sm text-foreground/80 whitespace-nowrap">
                                   {date}
                                 </div>
                               )}
@@ -110,7 +110,7 @@ export function ResumeSection({
                             </div>
                           </div>
                         </Accordion.Trigger>
-                        <Accordion.Content className="px-4 pb-4 text-sm text-muted-foreground overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
+                        <Accordion.Content className="px-4 pb-4 text-sm text-foreground/75 overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
                           {item.description && (
                             <p className="mt-2 leading-relaxed">
                               {renderEmphasis(item.description)}
