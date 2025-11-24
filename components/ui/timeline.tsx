@@ -1,6 +1,6 @@
 "use client";
-import { useScroll, useTransform, motion } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import React, { useRef } from "react";
 import { SectionHeading } from "./section-heading";
 
 export type TimelineEntry = {
@@ -29,22 +29,6 @@ export const Timeline = ({
 }: TimelineProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    if (ref.current) {
-      const rect = ref.current.getBoundingClientRect();
-      setHeight(rect.height - 40);
-    }
-  }, [ref]);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 10%", "end 50%"],
-  });
-
-  const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
-  const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
   return (
     <div className={`w-full font-sans ${className || ""}`} ref={containerRef}>
@@ -99,21 +83,6 @@ export const Timeline = ({
                 </div>
               </div>
             ))}
-
-            <div
-              style={{
-                height: height + "px",
-              }}
-              className="hidden md:block absolute left-0 top-8 w-[2px] overflow-hidden bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-border to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] -translate-x-1/2"
-            >
-              <motion.div
-                style={{
-                  height: heightTransform,
-                  opacity: opacityTransform,
-                }}
-                className="absolute inset-x-0 top-0 w-[2px] rounded-full bg-gradient-to-t from-purple-500 from-[0%] via-blue-500 via-[10%] to-transparent"
-              />
-            </div>
           </div>
 
           {actionButton && (
