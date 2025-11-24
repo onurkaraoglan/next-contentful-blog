@@ -90,6 +90,7 @@ export async function getTopTreeProjects() {
     select: "fields, metadata.tags",
     order: "-fields.date",
     limit: 3,
+    "fields.isPersonal": true,
   });
   if (entries.items) return entries.items;
   console.error(`Error getting top entries.`);
