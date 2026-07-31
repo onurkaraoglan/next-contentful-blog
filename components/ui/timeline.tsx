@@ -1,14 +1,17 @@
 "use client";
-import { motion } from "framer-motion";
-import React, { useRef } from "react";
+
+import dayjs from "dayjs";
+import { motion, useReducedMotion } from "framer-motion";
+import type { ReactNode } from "react";
 import { SectionHeading } from "./section-heading";
+
+export const TIMELINE_CONTENT_WIDTH = "max-w-2xl";
+export const TIMELINE_LAYOUT_WIDTH = "max-w-[54.5rem] lg:-translate-x-[4.75rem]";
 
 export type TimelineEntry = {
   id: string;
-  title: string;
-  description: string;
   date?: string;
-  content: React.ReactNode;
+  content: ReactNode;
 };
 
 type TimelineProps = {
@@ -18,117 +21,78 @@ type TimelineProps = {
     subTitle?: string;
   };
   className?: string;
-  actionButton?: React.ReactNode;
+  actionButton?: ReactNode;
 };
 
-export const Timeline = ({
-  data,
-  heading,
-  className,
-  actionButton,
-}: TimelineProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+function formatDate(date?: string) {
+  if (!date) return "";
+  const parsedDate = dayjs(date);
+  return parsedDate.isValid() ? parsedDate.format("MMM D, YYYY") : date;
+}
+
+export const Timeline = ({ data, heading, className, actionButton }: TimelineProps) => {
+  const reduceMotion = useReducedMotion();
+  const sortedData = [...data].sort((a, b) => {
+    const aTime = a.date ? new Date(a.date).getTime() : 0;
+    const bTime = b.date ? new Date(b.date).getTime() : 0;
+    return bTime - aTime;
+  });
 
   return (
-    <div className={`w-full font-sans ${className || ""}`} ref={containerRef}>
-      {heading && (
-        <SectionHeading title={heading.title} subTitle={heading.subTitle} />
-      )}
-      <div className="relative mx-auto max-w-7xl">
-        <div className="hidden md:block relative rounded-3xl bg-background">
-          <div className="absolute -inset-[2px] rounded-3xl bg-gradient-to-r from-[#1ca0fb]/20 via-[#7b61ff]/20 via-50% to-[#00ccb1]/20 dark:from-pink-500 dark:via-purple-500 dark:via-50% dark:to-cyan-500 dark:opacity-20"></div>
-          <div ref={ref} className="relative pb-20 pl-8 pr-8 pt-8">
-            {data.map((item, index) => (
-              <div
-                key={item.id}
-                className="flex justify-center md:justify-start pt-10 md:gap-10 md:pt-20 w-full"
-              >
-                <div className="sticky top-40 z-40 hidden md:flex max-w-xs flex-col self-start md:w-full lg:max-w-sm">
-                  <div className="absolute -left-[54px] md:-left-[54px] flex h-10 w-10 items-center justify-center rounded-full bg-card z-10">
-                    <div className="absolute -inset-[2px] rounded-full bg-gradient-to-r from-[#1ca0fb] via-[#7b61ff] to-[#00ccb1] dark:from-pink-500 dark:via-purple-500 dark:to-cyan-500"></div>
-                    <div className="relative bg-card rounded-full h-10 w-10 flex items-center justify-center">
-                      <div className="h-4 w-4 rounded-full bg-primary" />
-                    </div>
-                  </div>
-                  <motion.div
-                    initial={{ opacity: 0.5 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ margin: "-200px" }}
-                    className="md:pl-14"
+    <div className={`w-full font-sans ${className || ""}`}>
+      {heading && <SectionHeading title={heading.title} subTitle={heading.subTitle} />}
+
+      <div className={`relative mx-auto w-full ${TIMELINE_LAYOUT_WIDTH}`}>
+        {sortedData.map((item) => (
+          <motion.article
+            key={item.id}
+            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.12 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="grid grid-cols-1 md:grid-cols-[8rem_1.5rem_minmax(0,1fr)] md:gap-x-6"
+          >
+            <time
+              dateTime={item.date}
+              className="hidden pt-1 text-right text-xs font-medium tracking-wide text-muted-foreground md:block"
+            >
+              {formatDate(item.date)}
+            </time>
+
+            <div className="relative hidden justify-center md:flex">
+              <div className="absolute inset-y-0 w-px bg-border" />
+              <div className="relative mt-1.5 h-2.5 w-2.5 rounded-full border-2 border-background bg-foreground ring-1 ring-border" />
+            </div>
+
+            <div className="relative pb-14 md:pb-16">
+              <div className="absolute bottom-0 left-[5px] top-0 w-px bg-border md:hidden" />
+              <div className="absolute left-0 top-1.5 h-[11px] w-[11px] rounded-full border-2 border-background bg-foreground ring-1 ring-border md:hidden" />
+              <div className="pl-7 md:pl-0">
+                {item.date && (
+                  <time
+                    dateTime={item.date}
+                    className="mb-3 inline-flex rounded-full border border-border bg-muted/50 px-2.5 py-1 text-xs font-medium text-muted-foreground md:hidden"
                   >
-                    <h3 className="text-xl font-bold text-foreground md:text-2xl lg:text-3xl pb-3 leading-tight">
-                      {item.title}
-                    </h3>
-                    {item.date && (
-                      <p className="text-xs font-normal text-muted-foreground mt-1">
-                        {item.date}
-                      </p>
-                    )}
-                  </motion.div>
-                </div>
-
-                <div className="relative w-full md:w-full md:pl-4 md:pr-4 flex flex-col items-center md:items-start">
-                  <div className="mb-8 block md:hidden text-center">
-                    <h3 className="text-xl font-bold text-foreground pb-3 leading-tight">
-                      {item.title}
-                    </h3>
-                    {item.date && (
-                      <p className="text-xs font-normal text-muted-foreground mt-1">
-                        {item.date}
-                      </p>
-                    )}
-                  </div>
-                  {item.content}
-                </div>
+                    {formatDate(item.date)}
+                  </time>
+                )}
+                <div className={`w-full ${TIMELINE_CONTENT_WIDTH}`}>{item.content}</div>
               </div>
-            ))}
+            </div>
+          </motion.article>
+        ))}
+
+        {actionButton && (
+          <div className="grid grid-cols-1 md:grid-cols-[8rem_1.5rem_minmax(0,1fr)] md:gap-x-6">
+            <div className="hidden md:block" />
+            <div className="relative hidden justify-center md:flex">
+              <div className="absolute inset-y-0 w-px bg-border" />
+            </div>
+            <div className="pl-7 md:pl-0">
+              <div className={`w-full ${TIMELINE_CONTENT_WIDTH}`}>{actionButton}</div>
+            </div>
           </div>
-
-          {actionButton && (
-            <div className="pb-8 px-8 flex justify-start gap-10">
-              <div className="flex max-w-xs w-full lg:max-w-sm"></div>
-              <div className="flex-1 pl-4">
-                <div className="max-w-2xl">{actionButton}</div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="block md:hidden px-4">
-          {data.map((item, index) => (
-            <div key={`mobile-${item.id}`}>
-              <div className="pt-10 first:pt-0">
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-foreground pb-3 leading-tight">
-                    {item.title}
-                  </h3>
-                  {item.date && (
-                    <p className="text-xs font-normal text-muted-foreground mt-1">
-                      {item.date}
-                    </p>
-                  )}
-                </div>
-                <div className="flex justify-center">{item.content}</div>
-              </div>
-
-              {index < data.length - 1 && (
-                <div className="relative my-10">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-border"></div>
-                  </div>
-                  <div className="relative flex justify-center">
-                    <div className="bg-gradient-to-r from-transparent via-purple-500 via-50% to-transparent h-[1px] w-1/2"></div>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-
-          {actionButton && (
-            <div className="pt-8 flex justify-center">{actionButton}</div>
-          )}
-        </div>
+        )}
       </div>
     </div>
   );

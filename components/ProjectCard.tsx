@@ -38,9 +38,7 @@ export default function ProjectCard(props: Props) {
 
   return (
     <div className="relative group">
-      <Card className="relative overflow-hidden hover:shadow-lg transition-all duration-300 bg-background border-border md:border-0 ">
-        <div className="hidden md:block absolute -inset-[1px] rounded-lg bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-5 group-hover:opacity-15 transition-opacity duration-500"></div>
-        <div className="md:hidden block absolute -inset-[1px] rounded-lg bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-15"></div>
+      <Card className="relative overflow-hidden border-border/70 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
         <div className="relative h-48 w-full overflow-hidden">
           <Image
             src={src}
@@ -87,8 +85,7 @@ export default function ProjectCard(props: Props) {
         <CardFooter>
           <Link
             aria-label={slug(title)}
-            href="/project/[id]"
-            as={`/project/${slug(title)}-${id}`}
+            href={`/professional-work/${slug(title)}-${id}`}
             className="w-full"
           >
             <GradientButton className="w-full">View Details</GradientButton>

@@ -3,8 +3,8 @@
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
-import { useRef } from "react";
 import { SectionHeading } from "@onur/components/ui/section-heading";
+import { TIMELINE_LAYOUT_WIDTH } from "@onur/components/ui/timeline";
 
 export type ResumeItem = {
   id: string;
@@ -33,8 +33,6 @@ export function ResumeSection({
   items,
   className,
 }: ResumeSectionProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const renderEmphasis = (text: string) => {
     const parts = text.split(/(\*\*[^*]+\*\*)/g);
     return parts.map((part, idx) => {
@@ -51,99 +49,118 @@ export function ResumeSection({
     <section className={className || ""}>
       <SectionHeading title={heading.title} subTitle={heading.subTitle} />
 
-      <div className="relative mx-auto max-w-7xl px-4 md:px-0" ref={containerRef}>
-        <div className="relative rounded-3xl bg-background">
-        <div className="absolute -inset-[2px] rounded-3xl bg-gradient-to-r from-[#1ca0fb]/20 via-[#7b61ff]/20 via-50% to-[#00ccb1]/20 dark:from-pink-500 dark:via-purple-500 dark:via-50% dark:to-cyan-500 dark:opacity-20"></div>
-          <div className="relative pb-2 pl-2 pr-2 pt-2 md:pb-4 md:pl-4 md:pr-4 md:pt-4" ref={ref}>
-            <div className="flex justify-center md:justify-start w-full md:gap-10">
-              <div className="w-full">
-                <Accordion.Root
-                  type="multiple"
-                  className="w-full divide-y divide-border"
-                >
-                  {items.map((item) => {
-                    const dateParts: string[] = [];
-                    if (item.startDate) dateParts.push(item.startDate);
-                    if (item.endDate) dateParts.push(item.endDate);
-                    const date = dateParts.length
-                      ? dateParts.join(" — ")
-                      : undefined;
+      <div className={`relative mx-auto w-full px-4 md:px-0 ${TIMELINE_LAYOUT_WIDTH}`}>
+        <Accordion.Root type="multiple" className="space-y-0">
+          {items.map((item) => {
+            const dateParts: string[] = [];
+            if (item.startDate) dateParts.push(item.startDate);
+            if (item.endDate) dateParts.push(item.endDate);
+            const date = dateParts.length
+              ? dateParts.join(" - ")
+              : undefined;
 
-                    return (
-                      <Accordion.Item
-                        key={item.id}
-                        value={item.id}
-                        className="group overflow-hidden"
-                      >
-                        <Accordion.Trigger className="w-full">
-                          <div className="flex items-center justify-between gap-4 px-4 py-4">
-                            <div className="flex items-center gap-3 min-w-0 text-left">
-                              {item.logoSrc ? (
-                                <Image
-                                  src={item.logoSrc}
-                                  alt={`${item.organization} logo`}
-                                  width={40}
-                                  height={40}
-                                  className="h-10 w-10 rounded-full border bg-muted object-cover bg-white"
-                                />
-                              ) : (
-                                <div className="h-10 w-10 rounded-full border bg-muted flex items-center justify-center text-sm font-semibold">
-                                  {(item.organization || "?").charAt(0)}
-                                </div>
-                              )}
-                              <div className="min-w-0">
-                                <div className="truncate font-semibold text-left">
-                                  {item.organization}
-                                </div>
-                                <div className="text-sm text-foreground/70 truncate text-left">
-                                  {item.roleOrDegree}
-                                </div>
+            return (
+              <Accordion.Item
+                key={item.id}
+                value={item.id}
+                className="group grid grid-cols-1 md:grid-cols-[8rem_1.5rem_minmax(0,1fr)] md:gap-x-6"
+              >
+                <time className="hidden pt-5 text-right text-xs font-medium text-muted-foreground md:block">
+                  {date}
+                </time>
+
+                <div className="relative hidden justify-center md:flex">
+                  <div className="absolute inset-y-0 w-px bg-border" />
+                  <div className="relative mt-5 h-2.5 w-2.5 rounded-full border-2 border-background bg-foreground ring-1 ring-border" />
+                </div>
+
+                <div className="relative pb-5 md:pb-7">
+                  <div className="absolute bottom-0 left-[5px] top-0 w-px bg-border md:hidden" />
+                  <div className="absolute left-0 top-5 h-[11px] w-[11px] rounded-full border-2 border-background bg-foreground ring-1 ring-border md:hidden" />
+
+                  <div className="pl-7 md:pl-0">
+                    {date && (
+                      <time className="mb-3 inline-flex rounded-full border border-border bg-muted/50 px-2.5 py-1 text-xs font-medium text-muted-foreground md:hidden">
+                        {date}
+                      </time>
+                    )}
+
+                    <div className="w-full max-w-2xl overflow-hidden rounded-lg border border-border/70 bg-background shadow-sm transition-all duration-300 group-data-[state=open]:shadow-md">
+                      <Accordion.Trigger className="w-full text-left outline-none">
+                        <div className="flex items-center justify-between gap-4 px-4 py-4">
+                          <div className="flex min-w-0 items-center gap-3">
+                            {item.logoSrc ? (
+                              <Image
+                                src={item.logoSrc}
+                                alt={`${item.organization} logo`}
+                                width={40}
+                                height={40}
+                                className="h-10 w-10 rounded-full border bg-white object-cover"
+                              />
+                            ) : (
+                              <div className="flex h-10 w-10 items-center justify-center rounded-full border bg-muted text-sm font-semibold">
+                                {(item.organization || "?").charAt(0)}
                               </div>
-                            </div>
-                            <div className="flex items-center gap-3">
-                              {date && (
-                                <div className="text-sm text-foreground/80 whitespace-nowrap">
-                                  {date}
+                            )}
+                            <div className="min-w-0">
+                              <div className="truncate font-semibold">
+                                {item.organization}
+                              </div>
+                              <div className="truncate text-sm text-muted-foreground">
+                                {item.roleOrDegree}
+                              </div>
+                              {item.location && (
+                                <div className="truncate text-xs text-muted-foreground md:hidden">
+                                  {item.location}
                                 </div>
                               )}
-                              <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                             </div>
                           </div>
-                        </Accordion.Trigger>
-                        <Accordion.Content className="px-4 pb-4 text-sm text-foreground/75 overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
-                          {item.description && (
-                            <p className="mt-2 leading-relaxed">
-                              {renderEmphasis(item.description)}
-                            </p>
+                          <div className="flex items-center gap-3">
+                            {item.location && (
+                              <span className="hidden max-w-32 truncate text-xs text-muted-foreground md:inline">
+                                {item.location}
+                              </span>
+                            )}
+                            <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                          </div>
+                        </div>
+                      </Accordion.Trigger>
+                      <Accordion.Content className="overflow-hidden border-t border-border/70 px-4 pb-4 text-sm text-foreground/75 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+                        {item.description && (
+                          <p className="mt-4 leading-relaxed">
+                            {renderEmphasis(item.description)}
+                          </p>
+                        )}
+                        {item.bullets && item.bullets.length > 0 && (
+                          <ul className="mt-3 list-disc space-y-1 pl-5">
+                            {item.bullets.map((b, idx) => (
+                              <li key={`${item.id}-b-${idx}`}>
+                                {renderEmphasis(b)}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {item.tech && item.tech.length > 0 && (
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            {item.tech.map((t) => (
+                              <span
+                                key={`${item.id}-t-${t}`}
+                                className="rounded-md border bg-muted/30 px-2 py-1 text-xs"
+                              >
+                                {t}
+                              </span>
+                            ))}
+                          </div>
                           )}
-                          {item.bullets && item.bullets.length > 0 && (
-                            <ul className="mt-3 list-disc pl-5 space-y-1">
-                              {item.bullets.map((b, idx) => (
-                                <li key={`${item.id}-b-${idx}`}>{renderEmphasis(b)}</li>
-                              ))}
-                            </ul>
-                          )}
-                          {item.tech && item.tech.length > 0 && (
-                            <div className="mt-3 flex flex-wrap gap-2">
-                              {item.tech.map((t) => (
-                                <span
-                                  key={`${item.id}-t-${t}`}
-                                  className="px-2 py-1 rounded-md border text-xs bg-muted/30"
-                                >
-                                  {t}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        </Accordion.Content>
-                      </Accordion.Item>
-                    );
-                  })}
-                </Accordion.Root>
-              </div>
-            </div>
-          </div>
-        </div>
+                      </Accordion.Content>
+                    </div>
+                  </div>
+                </div>
+              </Accordion.Item>
+            );
+          })}
+        </Accordion.Root>
       </div>
     </section>
   );

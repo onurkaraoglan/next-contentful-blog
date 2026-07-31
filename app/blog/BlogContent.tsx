@@ -38,14 +38,11 @@ export default function BlogContent({ posts, tags }: Props) {
     () =>
       filteredPosts.map((post) => ({
         id: post.sys.id,
-        title: post.fields.title,
-        description: post.fields.description,
         date: post.fields.date,
         content: (
           <div className="w-full max-w-2xl mx-auto md:mx-0">
             <PostCard
               key={post.sys.id}
-              date={post.fields.date}
               image={post.fields.image.fields}
               title={post.fields.title}
               fieldDescription={post.fields.description}
@@ -92,19 +89,7 @@ export default function BlogContent({ posts, tags }: Props) {
       </div>
       <div>
         {postsData.length > 0 ? (
-          <>
-            <div className="block md:hidden mb-16">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t-2 border-border"></div>
-                </div>
-                <div className="relative flex justify-center">
-                  <div className="bg-gradient-to-r from-transparent via-purple-500 via-50% to-transparent h-[2px] w-2/3"></div>
-                </div>
-              </div>
-            </div>
-            <Timeline data={postsData} />
-          </>
+          <Timeline data={postsData} />
         ) : (
           <EmptyState message="We couldn't find any posts with that tag. How about trying another one? All the good content is just a click away! ✨" />
         )}
@@ -113,4 +98,3 @@ export default function BlogContent({ posts, tags }: Props) {
     </div>
   );
 }
-

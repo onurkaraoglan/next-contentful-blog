@@ -56,7 +56,6 @@ export async function getProjectTags() {
       "Responsive Web App",
       "Android",
       "iOS",
-      "Chrome Extension",
       "Full-Stack",
     ],
   });

@@ -49,6 +49,11 @@ export interface ImageFields {
 interface SysInfo {
   id: string;
   type: string;
+  contentType?: {
+    sys: {
+      id: string;
+    };
+  };
 }
 
 export interface MetadataTag {
@@ -59,7 +64,7 @@ export interface MetadataTag {
   };
 }
 
-export async function getProjects(isPersonal?: boolean) {
+export async function getProjects(isPersonal?: boolean): Promise<Project[]> {
   const query = {
     content_type: "project",
     select: "fields, metadata.tags",
@@ -72,8 +77,7 @@ export async function getProjects(isPersonal?: boolean) {
 
   const entries = await client.getEntries(query);
 
-  if (entries.items) return entries.items;
-  console.error(`Error getting entries`);
+  return (entries.items || []) as unknown as Project[];
 }
 
 export async function getPersonalProjects() {
@@ -84,23 +88,24 @@ export async function getWorkRelatedProjects() {
   return getProjects(false);
 }
 
-export async function getTopTreeProjects() {
+export async function getLatestProfessionalProjects(): Promise<Project[]> {
   const entries = await client.getEntries({
     content_type: "project",
-    select: "fields, metadata.tags",
+    select: "fields,metadata.tags",
     order: "-fields.date",
     limit: 3,
-    "fields.isPersonal": true,
+    "fields.isPersonal": false,
   });
-  if (entries.items) return entries.items;
-  console.error(`Error getting top entries.`);
+
+  return (entries.items || []) as unknown as Project[];
 }
 
-export async function getProject(id) {
-  const entry = await client.getEntry(id);
-  if (entry) {
-    return entry;
+export async function getProject(id: string): Promise<Project | null> {
+  try {
+    const entry = await client.getEntry(id);
+    if (entry.sys.contentType?.sys.id !== "project") return null;
+    return entry as unknown as Project;
+  } catch {
+    return null;
   }
-  console.error(`Error getting entry with ${id}.`);
 }
-

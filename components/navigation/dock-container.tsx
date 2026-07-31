@@ -1,7 +1,7 @@
 "use client";
 
 import { Dock } from "@onur/components/navigation/dock";
-import { Home, User, BookOpen, Briefcase, Mail, Moon, Sun } from "lucide-react";
+import { Home, User, BookOpen, Briefcase, Mail, Moon, Package, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -19,7 +19,13 @@ export function DockContainer() {
 
   useEffect(() => {
     // Update active apps based on current route
-    const currentPath = pathname.substring(1) || "home";
+    const currentPath = pathname === "/"
+      ? "home"
+      : pathname.startsWith("/product")
+        ? "products"
+        : pathname.startsWith("/professional-work")
+          ? "professional-work"
+          : pathname.substring(1).split("/")[0];
     setOpenApps([currentPath]);
   }, [pathname]);
 
@@ -35,14 +41,19 @@ export function DockContainer() {
       icon: <User className="h-5 w-5 " />,
     },
     {
+      id: "products",
+      name: "Products",
+      icon: <Package className="h-5 w-5 " />,
+    },
+    {
+      id: "professional-work",
+      name: "Work",
+      icon: <Briefcase className="h-5 w-5 " />,
+    },
+    {
       id: "blog",
       name: "Blog",
       icon: <BookOpen className="h-5 w-5 " />,
-    },
-    {
-      id: "projects",
-      name: "Projects",
-      icon: <Briefcase className="h-5 w-5 " />,
     },
     {
       id: "contact",

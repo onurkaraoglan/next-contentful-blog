@@ -93,11 +93,11 @@ export function Dock({
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className={cn(
-          "relative mx-auto w-max h-[60px] md:h-[80px] p-2.5 md:p-3.5 flex gap-2.5 md:gap-2 rounded-2xl md:rounded-3xl",
+          "relative mx-auto w-max max-w-[calc(100vw-1rem)] h-[52px] md:h-[76px] p-2 md:p-2.5 flex gap-1 rounded-2xl md:rounded-3xl",
           "isolate z-0",
-          "shadow-[0_8px_24px_rgba(0,0,0,0.12)]",
-          "dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)]",
-          "bg-white/10 dark:bg-black/20",
+          "border border-border/60 shadow-[0_14px_40px_rgba(0,0,0,0.18)]",
+          "dark:shadow-[0_14px_44px_rgba(0,0,0,0.55)]",
+          "bg-background/78 backdrop-blur-xl supports-[backdrop-filter]:bg-background/62",
           className
         )}
       >
@@ -105,7 +105,7 @@ export function Dock({
         <div
           className="absolute -z-10 inset-0 rounded-2xl md:rounded-3xl overflow-hidden"
           style={{
-            backdropFilter: "blur(0px)",
+            backdropFilter: "blur(14px)",
             filter: "url(#dock-glass)",
             isolation: "isolate",
           }}

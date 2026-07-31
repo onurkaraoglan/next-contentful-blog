@@ -1,9 +1,11 @@
 import { getTopTreePosts } from "@onur/data/api/post";
 import { getPostTags, getProjectTags } from "@onur/data/api/tag";
-import { getTopTreeProjects } from "@onur/data/api/project";
+import { getLatestProfessionalProjects } from "@onur/data/api/project";
+import { getLatestProducts } from "@onur/data/api/product";
 import { Hero } from "@onur/components/hero/Hero";
 import { Timeline } from "@onur/components/ui/timeline";
 import ProjectCard from "@onur/components/ProjectCard";
+import { ProductTimeline } from "@onur/components/products/ProductTimeline";
 import PostCard from "@onur/components/PostCard";
 import Link from "next/link";
 import { GradientButton } from "@onur/components/ui/gradient-button";
@@ -25,16 +27,15 @@ export const revalidate = 600; // Revalidate every 10 minutes
 
 export default async function Home() {
   const posts = await getTopTreePosts();
-  const projects = await getTopTreeProjects();
+  const products = await getLatestProducts();
+  const professionalProjects = await getLatestProfessionalProjects();
   const postTags = await getPostTags();
   const projectTags = await getProjectTags();
   const work: ResumeItem[] = workExperiences;
   const education: ResumeItem[] = educationHistory;
 
-  const projectsData = projects.map((project) => ({
+  const professionalProjectsData = professionalProjects.map((project) => ({
     id: project.sys.id,
-    title: project.fields.title,
-    description: project.fields.description,
     date: project.fields.date,
     content: (
       <div className="w-full max-w-2xl mx-auto md:mx-0">
@@ -54,15 +55,12 @@ export default async function Home() {
 
   const postsData = posts.map((post) => ({
     id: post.sys.id,
-    title: post.fields.title,
-    description: post.fields.description,
     date: post.fields.date,
     content: (
       <div className="w-full max-w-2xl mx-auto md:mx-0">
         <PostCard
           key={post.sys.id}
           id={post.sys.id}
-          date={post.fields.date}
           image={post.fields.image.fields}
           title={post.fields.title}
           fieldDescription={post.fields.description}
@@ -78,16 +76,32 @@ export default async function Home() {
       <Hero />
 
       <div className="container mx-auto px-4 py-20 space-y-24 md:space-y-64">
-        <Timeline
-          data={projectsData}
+        <ProductTimeline
+          products={products}
+          tags={projectTags}
           heading={{
-            title: "Latest Projects",
-            subTitle: "Check out my recent work",
+            title: "Latest Products",
+            subTitle: "Recent extensions, mobile apps and web apps",
           }}
           actionButton={
-            <Link href="/projects" className="w-full">
+            <Link href="/products" className="w-full max-w-sm">
               <GradientButton variant="outline" className="w-full">
-                View All Projects
+                View All Products
+              </GradientButton>
+            </Link>
+          }
+        />
+
+        <Timeline
+          data={professionalProjectsData}
+          heading={{
+            title: "Latest Professional Work",
+            subTitle: "Recent projects delivered through my professional work",
+          }}
+          actionButton={
+            <Link href="/professional-work" className="w-full">
+              <GradientButton variant="outline" className="w-full">
+                View All Professional Work
               </GradientButton>
             </Link>
           }

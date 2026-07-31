@@ -13,11 +13,31 @@ export type ResumeWork = {
 
 export const workExperiences: ResumeWork[] = [
   {
+    id: "work-fraudflow-1",
+    roleOrDegree: "Lead Full-Stack Software Engineer",
+    organization: "FraudFlow",
+    location: "Istanbul, Turkey",
+    startDate: "04/2026",
+    endDate: "Present",
+    description:
+      "As the Lead Full-Stack Engineer at FraudFlow, I lead the development of an AI-powered fraud detection and automation platform across the **frontend**, **backend**, and **database**, while conducting **code reviews** and **mentoring junior engineers**.",
+    bullets: [
+      "**FraudFlow AI** (Turkey): The platform helps insurance companies identify fraud risks early in the claims lifecycle, reduce fraud-related losses, and make more transparent, data-driven decisions.",
+    ],
+    tech: [
+      "React",
+      "TypeScript",
+      "Golang",
+      "PostgreSQL"
+    ],
+    logoSrc: "/images/logo/fraudflow.png"
+  },
+  {
     id: "work-fill-1",
     roleOrDegree: "Full-Stack Software Engineer",
     organization: "Fill Software and Consulting Services Corp.",
     location: "Istanbul, Turkey",
-    startDate: "11/2022",
+    startDate: "03/2026",
     endDate: "Present",
     description:
       "At Fill Software, I work as a full-stack engineer contributing to both the **frontend**, **backend** and **mobile development** of international products across different markets including Costa Rica, Japan, Georgia and Turkey. My work spans building **scalable backend services**, designing **modular UI systems**, improving **architecture** and ensuring **code quality** through reviews and mentoring. I collaborate **closely with designers**, **product managers** and **cross-functional teams** to deliver seamless user experiences.",

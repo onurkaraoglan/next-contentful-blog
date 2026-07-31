@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import slug from "slug";
-import dayjs from "dayjs";
-import advancedFormat from "dayjs/plugin/advancedFormat";
 import { ImageFields, MetadataTag } from "@onur/data/api/project";
 import { Tag } from "@onur/data/api/tag";
 import { getTagNameById } from "@onur/lib/tag";
@@ -10,11 +8,8 @@ import { useMemo } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@onur/components/ui/card";
 import { GradientButton } from "@onur/components/ui/gradient-button";
 
-dayjs.extend(advancedFormat);
-
 interface Props {
   id: string;
-  date: string;
   image: ImageFields;
   title: string;
   fieldDescription: string;
@@ -23,7 +18,7 @@ interface Props {
 }
 
 export default function PostCard(props: Props) {
-  const { date, image, title, fieldDescription, id, metaTags } = props;
+  const { image, title, fieldDescription, id, metaTags } = props;
   let { file, description } = image;
   const src = useMemo(() => `https:${file.url}`, [file.url]);
   const tags = useMemo(() => {
@@ -35,9 +30,7 @@ export default function PostCard(props: Props) {
   return (
     <div className="relative group">
       
-      <Card className="relative overflow-hidden hover:shadow-lg transition-all duration-300 bg-background border-border md:border-0">
-      <div className="hidden md:block absolute -inset-[1px] rounded-lg bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-5 group-hover:opacity-15 transition-opacity duration-500"></div>
-      <div className="md:hidden block absolute -inset-[1px] rounded-lg bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-15"></div>
+      <Card className="relative overflow-hidden border-border/70 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
         <div className="relative h-48 w-full overflow-hidden">
         <Image
           src={src}
@@ -48,9 +41,6 @@ export default function PostCard(props: Props) {
         />
       </div>
       <CardHeader>
-        <p className="text-sm text-muted-foreground mb-2">
-          {dayjs(date).format("MMM Do, YYYY")}
-        </p>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{fieldDescription}</CardDescription>
       </CardHeader>

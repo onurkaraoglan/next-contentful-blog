@@ -11,6 +11,7 @@ import {
   workExperiences,
   educationHistory,
 } from "@onur/data/static/resume";
+import { BriefcaseBusiness, Sparkles } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -58,21 +59,21 @@ export default function About() {
           digital experiences
         </p>
       </div>
-      <div className="grid gap-8 px-4">
+      <div className="grid gap-6 px-4">
         <div className="relative">
-          <Card className="relative bg-background border-none">
-            <div className="absolute -inset-[2px] rounded-xl bg-gradient-to-r from-[#1ca0fb]/20 via-[#7b61ff]/20 via-50% to-[#00ccb1]/20 dark:from-pink-500 dark:via-purple-500 dark:via-50% dark:to-cyan-500 dark:opacity-20"></div>
-
+          <Card className="relative overflow-hidden rounded-lg border-border/70 bg-background shadow-sm">
             <CardHeader className="relative">
-              <CardTitle className="flex items-center gap-2">
-                <span className="text-2xl">💼</span>
+              <CardTitle className="flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-md border bg-muted/40 text-foreground">
+                  <BriefcaseBusiness className="h-4 w-4" />
+                </span>
                 <span>Experience & Background</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="relative space-y-6 text-base md:text-lg leading-relaxed">
+            <CardContent className="relative space-y-6 text-base leading-relaxed text-foreground/80 md:text-lg">
               <p>
                 I am a full-stack software engineer with{" "}
-                <span className="font-bold text-purple-500">
+                <span className="font-semibold text-foreground">
                   {year - 2015}+ years of experience
                 </span>{" "}
                 and a Bachelor's degree in Computer Science. I have hands-on
@@ -89,15 +90,16 @@ export default function About() {
           </Card>
         </div>
         <div className="relative">
-          <Card className="relative bg-background border-none">
-            <div className="absolute -inset-[2px] rounded-xl bg-gradient-to-r from-[#1ca0fb]/20 via-[#7b61ff]/20 via-50% to-[#00ccb1]/20 dark:from-pink-500 dark:via-purple-500 dark:via-50% dark:to-cyan-500 dark:opacity-20"></div>
+          <Card className="relative overflow-hidden rounded-lg border-border/70 bg-background shadow-sm">
             <CardHeader className="relative">
-              <CardTitle className="flex items-center gap-2">
-                <span className="text-2xl">🚀</span>
+              <CardTitle className="flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-md border bg-muted/40 text-foreground">
+                  <Sparkles className="h-4 w-4" />
+                </span>
                 <span>Philosophy & Growth</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="relative text-base md:text-lg leading-relaxed">
+            <CardContent className="relative text-base leading-relaxed text-foreground/80 md:text-lg">
               <p>
                 I enjoy being challenged and engaging with projects that
                 require me to work outside of my comfort and knowledge set.
@@ -166,4 +168,3 @@ export default function About() {
     </div>
   );
 }
-
