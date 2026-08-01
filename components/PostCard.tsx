@@ -6,7 +6,7 @@ import { Tag } from "@onur/data/api/tag";
 import { getTagNameById } from "@onur/lib/tag";
 import { useMemo } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@onur/components/ui/card";
-import { GradientButton } from "@onur/components/ui/gradient-button";
+import { GradientButton } from "@onur/components/ui/cta-button";
 
 interface Props {
   id: string;

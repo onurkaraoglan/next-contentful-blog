@@ -28,7 +28,7 @@ export function DockItem({
   const ref = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
-  const baseSize = 36;
+  const baseSize = 43;
   
   // Only calculate animations for desktop
   const distance = useMotionValue(9999);
@@ -98,8 +98,8 @@ export function DockItem({
           aria-current={isOpen ? "page" : undefined}
           title={app.name}
           className={cn(
-            "relative w-full h-full rounded-full flex flex-col items-center justify-center cursor-pointer",
-            "p-2 transition-all duration-200 z-0 outline-none border",
+            "relative w-full h-full rounded-2xl flex flex-col items-center justify-center cursor-pointer",
+            "p-2 transition-all duration-200 z-0 outline-none border [&_svg]:h-5 [&_svg]:w-5",
             isOpen
               ? "border-foreground bg-foreground text-background"
               : "border-transparent bg-transparent/10 text-foreground"
@@ -107,12 +107,12 @@ export function DockItem({
         >
           {/* Inner highlight */}
           <div
-            className={cn("absolute inset-0 z-0 overflow-hidden rounded-full pointer-events-none shadow-[inset_2px_2px_0px_-2px_rgba(0,0,0,0.25),_inset_0_0_3px_1px_rgba(0,0,0,0.25)] dark:shadow-[inset_2px_2px_0px_-2px_rgba(255,255,255,0.7),_inset_0_0_3px_1px_rgba(255,255,255,0.7)]", isOpen ? "bg-background/10" : "bg-transparent")}
+            className={cn("absolute inset-0 z-0 overflow-hidden rounded-2xl pointer-events-none shadow-[inset_2px_2px_0px_-2px_rgba(0,0,0,0.25),_inset_0_0_3px_1px_rgba(0,0,0,0.25)] dark:shadow-[inset_2px_2px_0px_-2px_rgba(255,255,255,0.7),_inset_0_0_3px_1px_rgba(255,255,255,0.7)]", isOpen ? "bg-background/10" : "bg-transparent")}
           />
 
           {/* Liquid glass layer */}
           <div
-            className="absolute -z-10 inset-0 rounded-full overflow-hidden"
+            className="absolute -z-10 inset-0 rounded-2xl overflow-hidden"
             style={{
               backdropFilter: "blur(2px)",
               filter: "url(#dock-item-glass)",
@@ -127,7 +127,7 @@ export function DockItem({
               className="w-8 h-8 object-contain relative z-10"
             />
           ) : (
-            <div className="w-7 h-7 flex items-center justify-center relative z-10">
+            <div className="w-8 h-8 flex items-center justify-center relative z-10">
               {app.icon}
             </div>
           )}

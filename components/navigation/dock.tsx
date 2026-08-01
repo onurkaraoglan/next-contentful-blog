@@ -93,7 +93,7 @@ export function Dock({
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className={cn(
-          "relative mx-auto w-max max-w-[calc(100vw-1rem)] h-[52px] md:h-[76px] p-2 md:p-2.5 flex gap-1 rounded-2xl md:rounded-3xl",
+          "relative mx-auto w-max max-w-[calc(100vw-0.125rem)] h-[61px] md:h-[76px] p-2 md:p-2.5 flex gap-1.5 md:gap-2 rounded-2xl md:rounded-3xl",
           "isolate z-0",
           "border border-border/60 shadow-[0_14px_40px_rgba(0,0,0,0.18)]",
           "dark:shadow-[0_14px_44px_rgba(0,0,0,0.55)]",

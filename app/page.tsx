@@ -8,7 +8,7 @@ import ProjectCard from "@onur/components/ProjectCard";
 import { ProductTimeline } from "@onur/components/products/ProductTimeline";
 import PostCard from "@onur/components/PostCard";
 import Link from "next/link";
-import { GradientButton } from "@onur/components/ui/gradient-button";
+import { GradientButton } from "@onur/components/ui/cta-button";
 import ResumeSection, {
   ResumeItem,
 } from "@onur/components/resume/ResumeSection";
@@ -107,17 +107,6 @@ export default async function Home() {
           }
         />
 
-        <div className="block md:hidden">
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t-2 border-border"></div>
-            </div>
-            <div className="relative flex justify-center">
-              <div className="bg-gradient-to-r from-transparent via-purple-500 via-50% to-transparent h-[2px] w-2/3"></div>
-            </div>
-          </div>
-        </div>
-
         <ResumeSection
           heading={{ title: "Work Experience" }}
           items={work}
@@ -127,17 +116,6 @@ export default async function Home() {
           heading={{ title: "Education" }}
           items={education}
         />
-
-        <div className="block md:hidden">
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t-2 border-border"></div>
-            </div>
-            <div className="relative flex justify-center">
-              <div className="bg-gradient-to-r from-transparent via-purple-500 via-50% to-transparent h-[2px] w-2/3"></div>
-            </div>
-          </div>
-        </div>
 
         <Timeline
           data={postsData}

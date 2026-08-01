@@ -38,13 +38,13 @@ export function BackButton() {
       <LiquidGlassFilter />
       <button
         onClick={() => router.back()}
-        className="group fixed top-6 left-6 md:left-10 z-50 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl isolate shadow-[0_8px_24px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] bg-white/10 dark:bg-black/20 hover:bg-white/15 dark:hover:bg-black/30 transition-all duration-300"
+        className="group fixed top-6 left-6 md:left-10 z-50 inline-flex items-center gap-2 rounded-xl border border-border/60 bg-background/78 px-4 py-2.5 text-foreground shadow-[0_14px_40px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-background/90 hover:shadow-[0_18px_48px_rgba(0,0,0,0.2)] supports-[backdrop-filter]:bg-background/62 dark:shadow-[0_14px_44px_rgba(0,0,0,0.55)]"
       >
         {/* Liquid glass distortion layer */}
         <div
           className="absolute -z-10 inset-0 rounded-xl overflow-hidden"
           style={{
-            backdropFilter: "blur(0px)",
+            backdropFilter: "blur(14px)",
             filter: "url(#back-button-glass)",
             isolation: "isolate",
           }}
@@ -59,4 +59,3 @@ export function BackButton() {
     </>
   );
 }
-

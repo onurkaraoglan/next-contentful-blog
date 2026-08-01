@@ -13,7 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@onur/components/ui/card";
-import { GradientButton } from "@onur/components/ui/gradient-button";
+import { GradientButton } from "@onur/components/ui/cta-button";
 import { ProductStatisticChip } from "./ProductStatisticChip";
 
 export default function ProductCard({ product, tags }: { product: Product; tags: Tag }) {
