@@ -1,5 +1,7 @@
 import Image from "next/image";
-import { getPost, getPosts } from "@onur/data/api/post";
+import Link from "next/link";
+import { getPost, getPosts, getRelatedPosts } from "@onur/data/api/post";
+import { getPostTags } from "@onur/data/api/tag";
 import slug from "slug";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import {
@@ -13,7 +15,10 @@ import {
 } from "@contentful/rich-text-types";
 import PrismContent from "./PrismContent";
 import type { Metadata } from "next";
+import PostCard from "@onur/components/PostCard";
 import { BackButton } from "@onur/components/ui/back-button";
+import CtaButton from "@onur/components/ui/cta-button";
+import { SectionHeading } from "@onur/components/ui/section-heading";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -58,6 +63,11 @@ export default async function Post({ params }: Props) {
   const { id: paramId } = await params;
   const id = paramId.split("-").slice(-1)[0];
   const post = await getPost(id);
+
+  const [relatedPosts, postTags] = await Promise.all([
+    getRelatedPosts(id),
+    getPostTags(),
+  ]);
 
   let languages = "";
   post.fields.languages?.forEach((language) => {
@@ -242,7 +252,32 @@ export default async function Post({ params }: Props) {
           {body}
         </div>
       </div>
+
+      <section className="container mx-auto px-4 pb-20 pt-12 md:pt-20">
+        {relatedPosts.length > 0 && (
+          <>
+            <SectionHeading title="Other Posts" />
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              {relatedPosts.map((relatedPost) => (
+                <PostCard
+                  key={relatedPost.sys.id}
+                  id={relatedPost.sys.id}
+                  image={relatedPost.fields.image.fields}
+                  title={relatedPost.fields.title}
+                  fieldDescription={relatedPost.fields.description}
+                  metaTags={relatedPost.metadata.tags}
+                  tags={postTags}
+                />
+              ))}
+            </div>
+          </>
+        )}
+        <div className="mx-auto mt-8 w-full max-w-sm">
+          <CtaButton asChild variant="outline" className="w-full">
+            <Link href="/blog">View All Posts</Link>
+          </CtaButton>
+        </div>
+      </section>
     </PrismContent>
   );
 }
-

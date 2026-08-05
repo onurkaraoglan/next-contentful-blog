@@ -152,6 +152,23 @@ export async function getTopTreePosts() {
   console.error(`Error getting top entries.`);
 }
 
+export async function getRelatedPosts(excludedPostId: string): Promise<Post[]> {
+  try {
+    const entries = await client.getEntries({
+      content_type: "blog",
+      select:
+        "fields.title, fields.description, fields.date, fields.languages, fields.image, metadata.tags",
+      order: "-fields.date",
+      limit: 3,
+      "sys.id[ne]": excludedPostId,
+    });
+
+    return (entries.items || []) as unknown as Post[];
+  } catch {
+    return [];
+  }
+}
+
 export async function getPost(id) {
   const entry = await client.getEntry(id);
   if (entry) {
@@ -159,4 +176,3 @@ export async function getPost(id) {
   }
   console.error(`Error getting entry with ${id}.`);
 }
-

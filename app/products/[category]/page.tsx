@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   getProducts,
@@ -6,8 +7,9 @@ import {
   type ProductCategory,
 } from "@onur/data/api/product";
 import { getProjectTags } from "@onur/data/api/tag";
-import { ProductTimeline } from "@onur/components/products/ProductTimeline";
+import { ProductGrid } from "@onur/components/products/ProductGrid";
 import { SectionHeading } from "@onur/components/ui/section-heading";
+import CtaButton from "@onur/components/ui/cta-button";
 import { getProductCategoryDetails } from "@onur/data/static/products";
 
 interface Props {
@@ -47,11 +49,19 @@ export default async function ProductCategoryPage({ params }: Props) {
     <div className="min-h-[calc(100vh-200px)]">
       <div className="container mx-auto px-4 pt-20 pb-20">
         <SectionHeading title={copy.title} subTitle={copy.description} />
-        <ProductTimeline
+        <ProductGrid
           products={products}
           tags={tags}
           emptyMessage={`No ${copy.title.toLowerCase()} have been published yet.`}
         />
+        <div className="mx-auto mt-8 flex w-full max-w-2xl flex-col gap-4 sm:flex-row">
+          <CtaButton asChild variant="outline" className="w-full">
+            <Link href="/products">Other Products</Link>
+          </CtaButton>
+          <CtaButton asChild variant="outline" className="w-full">
+            <Link href="/professional-work">Professional Work</Link>
+          </CtaButton>
+        </div>
       </div>
     </div>
   );

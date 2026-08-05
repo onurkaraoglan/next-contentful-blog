@@ -6,7 +6,7 @@ import { Tag } from "@onur/data/api/tag";
 import { getTagNameById } from "@onur/lib/tag";
 import { useMemo } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@onur/components/ui/card";
-import { GradientButton } from "@onur/components/ui/cta-button";
+import  CtaButton  from "@onur/components/ui/cta-button";
 
 interface Props {
   id: string;
@@ -63,9 +63,9 @@ export default function PostCard(props: Props) {
           as={`/post/${slug(title)}-${id}`}
           className="w-full"
         >
-          <GradientButton className="w-full">
+          <CtaButton className="w-full">
             Read More
-          </GradientButton>
+          </CtaButton>
         </Link>
       </CardFooter>
       </Card>

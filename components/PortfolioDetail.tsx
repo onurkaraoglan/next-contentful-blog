@@ -77,7 +77,14 @@ export default function PortfolioDetail({
                   <div className="flex flex-wrap gap-1.5">
                     {techStack.map((stack) => (
                       <div key={stack} className="flex items-center gap-1 px-2 py-1 text-xs rounded-md bg-muted">
-                        <Image src={`/images/tech/${slugify(stack)}.svg`} alt={stack} width={16} height={16} unoptimized />
+                        <Image
+                          src={`/images/tech/${slugify(stack)}.svg`}
+                          alt={stack}
+                          width={16}
+                          height={16}
+                          className="h-4 w-4 object-contain"
+                          unoptimized
+                        />
                         <span>{stack}</span>
                       </div>
                     ))}

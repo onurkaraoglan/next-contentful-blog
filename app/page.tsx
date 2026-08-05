@@ -4,14 +4,15 @@ import { getLatestProfessionalProjects } from "@onur/data/api/project";
 import { getLatestProducts } from "@onur/data/api/product";
 import { Hero } from "@onur/components/hero/Hero";
 import { Timeline } from "@onur/components/ui/timeline";
-import ProjectCard from "@onur/components/ProjectCard";
-import { ProductTimeline } from "@onur/components/products/ProductTimeline";
+import ProjectGrid from "@onur/components/ProjectGrid";
+import { ProductGrid } from "@onur/components/products/ProductGrid";
 import PostCard from "@onur/components/PostCard";
 import Link from "next/link";
-import { GradientButton } from "@onur/components/ui/cta-button";
+import  CtaButton  from "@onur/components/ui/cta-button";
 import ResumeSection, {
   ResumeItem,
 } from "@onur/components/resume/ResumeSection";
+import { SectionHeading } from "@onur/components/ui/section-heading";
 import {
   workExperiences,
   educationHistory,
@@ -33,25 +34,6 @@ export default async function Home() {
   const projectTags = await getProjectTags();
   const work: ResumeItem[] = workExperiences;
   const education: ResumeItem[] = educationHistory;
-
-  const professionalProjectsData = professionalProjects.map((project) => ({
-    id: project.sys.id,
-    date: project.fields.date,
-    content: (
-      <div className="w-full max-w-2xl mx-auto md:mx-0">
-        <ProjectCard
-          key={project.sys.id}
-          id={project.sys.id}
-          image={project.fields.image.fields}
-          title={project.fields.title}
-          fieldDescription={project.fields.description}
-          metaTags={project.metadata.tags}
-          tags={projectTags}
-          techStack={project.fields.techStack}
-        />
-      </div>
-    ),
-  }));
 
   const postsData = posts.map((post) => ({
     id: post.sys.id,
@@ -76,7 +58,7 @@ export default async function Home() {
       <Hero />
 
       <div className="container mx-auto px-4 py-20 space-y-24 md:space-y-64">
-        <ProductTimeline
+        <ProductGrid
           products={products}
           tags={projectTags}
           heading={{
@@ -85,27 +67,27 @@ export default async function Home() {
           }}
           actionButton={
             <Link href="/products" className="w-full max-w-sm">
-              <GradientButton variant="outline" className="w-full">
+              <CtaButton variant="outline" className="w-full">
                 View All Products
-              </GradientButton>
+              </CtaButton>
             </Link>
           }
         />
 
-        <Timeline
-          data={professionalProjectsData}
-          heading={{
-            title: "Latest Professional Work",
-            subTitle: "Recent projects delivered through my professional work",
-          }}
-          actionButton={
+        <section>
+          <SectionHeading
+            title="Latest Professional Work"
+            subTitle="Recent projects delivered through my professional work"
+          />
+          <ProjectGrid projects={professionalProjects} tags={projectTags} />
+          <div className="mx-auto mt-8 w-full max-w-sm">
             <Link href="/professional-work" className="w-full">
-              <GradientButton variant="outline" className="w-full">
+              <CtaButton variant="outline" className="w-full">
                 View All Professional Work
-              </GradientButton>
+              </CtaButton>
             </Link>
-          }
-        />
+          </div>
+        </section>
 
         <ResumeSection
           heading={{ title: "Work Experience" }}
@@ -125,9 +107,9 @@ export default async function Home() {
           }}
           actionButton={
             <Link href="/blog" className="w-full">
-              <GradientButton variant="outline" className="w-full">
+              <CtaButton variant="outline" className="w-full">
                 View All Posts
-              </GradientButton>
+              </CtaButton>
             </Link>
           }
         />

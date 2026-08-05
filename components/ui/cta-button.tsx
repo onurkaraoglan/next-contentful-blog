@@ -2,13 +2,13 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@onur/lib/utils";
 
-export interface GradientButtonProps
+export interface CtaButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
   variant?: "filled" | "outline";
 }
 
-const CtaButton = React.forwardRef<HTMLButtonElement, GradientButtonProps>(
+const CtaButton = React.forwardRef<HTMLButtonElement, CtaButtonProps>(
   (
     { className, asChild = false, variant = "filled", children, ...props },
     ref
@@ -44,6 +44,6 @@ const CtaButton = React.forwardRef<HTMLButtonElement, GradientButtonProps>(
     );
   }
 );
-CtaButton.displayName = "GradientButton";
+CtaButton.displayName = "CtaButton";
 
-export { CtaButton as GradientButton };
+export default CtaButton ;

@@ -100,6 +100,25 @@ export async function getLatestProfessionalProjects(): Promise<Project[]> {
   return (entries.items || []) as unknown as Project[];
 }
 
+export async function getRelatedProfessionalProjects(
+  excludedProjectId: string
+): Promise<Project[]> {
+  try {
+    const entries = await client.getEntries({
+      content_type: "project",
+      select: "fields,metadata.tags",
+      order: "-fields.date",
+      limit: 3,
+      "fields.isPersonal": false,
+      "sys.id[ne]": excludedProjectId,
+    });
+
+    return (entries.items || []) as unknown as Project[];
+  } catch {
+    return [];
+  }
+}
+
 export async function getProject(id: string): Promise<Project | null> {
   try {
     const entry = await client.getEntry(id);

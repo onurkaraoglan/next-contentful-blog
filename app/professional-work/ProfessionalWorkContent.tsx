@@ -3,8 +3,7 @@
 import { useMemo, useState } from "react";
 import type { Project } from "@onur/data/api/project";
 import type { Tag } from "@onur/data/api/tag";
-import ProjectCard from "@onur/components/ProjectCard";
-import { Timeline } from "@onur/components/ui/timeline";
+import ProjectGrid from "@onur/components/ProjectGrid";
 import { Button } from "@onur/components/ui/button";
 import { EmptyState } from "@onur/components/ui/empty-state";
 
@@ -17,28 +16,6 @@ export default function ProfessionalWorkContent({ projects, tags }: { projects: 
         ? projects
         : projects.filter((project) => project.metadata.tags.some((tag) => tag.sys.id === activeTag)),
     [activeTag, projects]
-  );
-
-  const timelineData = useMemo(
-    () =>
-      filteredProjects.map((project) => ({
-        id: project.sys.id,
-        date: project.fields.date,
-        content: (
-          <div className="w-full max-w-2xl mx-auto md:mx-0">
-            <ProjectCard
-              id={project.sys.id}
-              image={project.fields.image.fields}
-              title={project.fields.title}
-              fieldDescription={project.fields.description}
-              metaTags={project.metadata.tags}
-              tags={tags}
-              techStack={project.fields.techStack}
-            />
-          </div>
-        ),
-      })),
-    [filteredProjects, tags]
   );
 
   return (
@@ -66,8 +43,8 @@ export default function ProfessionalWorkContent({ projects, tags }: { projects: 
           </div>
         )}
 
-        {timelineData.length > 0 ? (
-          <Timeline data={timelineData} />
+        {filteredProjects.length > 0 ? (
+          <ProjectGrid projects={filteredProjects} tags={tags} />
         ) : (
           <EmptyState message="No work projects here with that tag. Check out the other tags to see what I've been working on! 💼" />
         )}

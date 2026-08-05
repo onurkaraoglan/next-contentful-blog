@@ -13,7 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@onur/components/ui/card";
-import { GradientButton } from "@onur/components/ui/cta-button";
+import  CtaButton  from "@onur/components/ui/cta-button";
 import { ProductStatisticChip } from "./ProductStatisticChip";
 
 export default function ProductCard({ product, tags }: { product: Product; tags: Tag }) {
@@ -31,13 +31,16 @@ export default function ProductCard({ product, tags }: { product: Product; tags:
             src={src}
             alt={fields.image.fields.description || fields.title}
             fill
-            className="object-cover"
+            className="object-cover object-top"
             unoptimized
+            loading="eager"
           />
         </div>
         <CardHeader className="relative">
           <CardTitle>{fields.title}</CardTitle>
-          <CardDescription>{fields.description}</CardDescription>
+          <CardDescription className="line-clamp-2">
+            {fields.description}
+          </CardDescription>
         </CardHeader>
         <CardContent className="relative flex-1 space-y-4">
           {fields.statistics && fields.statistics.length > 0 && (
@@ -57,7 +60,14 @@ export default function ProductCard({ product, tags }: { product: Product; tags:
           <div className="flex flex-wrap gap-2">
             {(fields.techStack || []).map((stack) => (
               <div key={stack} className="flex items-center gap-1 px-2 py-1 text-xs rounded-md bg-muted">
-                <Image src={`/images/tech/${slugify(stack)}.svg`} alt={stack} width={16} height={16} unoptimized />
+                <Image
+                  src={`/images/tech/${slugify(stack)}.svg`}
+                  alt={stack}
+                  width={16}
+                  height={16}
+                  className="h-4 w-4 object-contain"
+                  unoptimized
+                />
                 <span>{stack}</span>
               </div>
             ))}
@@ -65,7 +75,7 @@ export default function ProductCard({ product, tags }: { product: Product; tags:
         </CardContent>
         <CardFooter className="relative">
           <Link href={`/product/${slug(fields.title)}-${sys.id}`} className="w-full">
-            <GradientButton className="w-full">View Details</GradientButton>
+            <CtaButton className="w-full">View Details</CtaButton>
           </Link>
         </CardFooter>
       </Card>

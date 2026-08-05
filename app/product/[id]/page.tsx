@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import slug from "slug";
-import { getProduct, getProducts } from "@onur/data/api/product";
+import {
+  getProduct,
+  getProducts,
+  getRelatedProducts,
+} from "@onur/data/api/product";
 import { getProjectTags } from "@onur/data/api/tag";
+import { getProductCategoryDetails } from "@onur/data/static/products";
 import { getTagNameById } from "@onur/lib/tag";
 import PortfolioDetail from "@onur/components/PortfolioDetail";
+import { ProductGrid } from "@onur/components/products/ProductGrid";
+import CtaButton from "@onur/components/ui/cta-button";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -31,23 +39,48 @@ export default async function ProductDetailPage({ params }: Props) {
   const product = await getProduct(getEntryId((await params).id));
   if (!product) notFound();
 
-  const tags = await getProjectTags();
+  const [tags, relatedProducts] = await Promise.all([
+    getProjectTags(),
+    getRelatedProducts(product.fields.category, product.sys.id),
+  ]);
   const tagNames = product.metadata.tags
     .map((tag) => getTagNameById(tags.items, tag.sys.id))
     .filter((tag): tag is string => Boolean(tag));
 
+  const category = getProductCategoryDetails(product.fields.category);
+  if (!category) notFound();
+
   return (
-    <PortfolioDetail
-      title={product.fields.title}
-      description={product.fields.description}
-      image={product.fields.image?.fields}
-      tags={tagNames}
-      techStack={product.fields.techStack}
-      url={product.fields.url}
-      webStoreUrl={product.fields.webStoreUrl}
-      appStoreUrl={product.fields.appStoreUrl}
-      googlePlayUrl={product.fields.googlePlayUrl}
-      statistics={product.fields.statistics}
-    />
+    <>
+      <PortfolioDetail
+        title={product.fields.title}
+        description={product.fields.description}
+        image={product.fields.image?.fields}
+        tags={tagNames}
+        techStack={product.fields.techStack}
+        url={product.fields.url}
+        webStoreUrl={product.fields.webStoreUrl}
+        appStoreUrl={product.fields.appStoreUrl}
+        googlePlayUrl={product.fields.googlePlayUrl}
+        statistics={product.fields.statistics}
+      />
+
+      <section className="mx-auto w-full max-w-5xl px-4 pb-20 md:px-0">
+        {relatedProducts.length > 0 && (
+          <ProductGrid
+            products={relatedProducts}
+            tags={tags}
+            heading={{ title: `Other ${category.title}` }}
+          />
+        )}
+        <div className="mx-auto mt-8 w-full max-w-sm">
+          <CtaButton asChild variant="outline" className="w-full">
+            <Link href={`/products/${category.id}`}>
+              View All {category.title}
+            </Link>
+          </CtaButton>
+        </div>
+      </section>
+    </>
   );
 }

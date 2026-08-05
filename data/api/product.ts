@@ -83,6 +83,27 @@ export async function getLatestProducts(): Promise<Product[]> {
   }
 }
 
+export async function getRelatedProducts(
+  category: ProductCategory,
+  excludedProductId: string
+): Promise<Product[]> {
+  try {
+    const entries = await client.getEntries({
+      content_type: "product",
+      select: "fields,metadata.tags",
+      order: "-fields.date",
+      include: 2,
+      limit: 3,
+      "fields.category": category,
+      "sys.id[ne]": excludedProductId,
+    });
+
+    return (entries.items || []) as unknown as Product[];
+  } catch {
+    return [];
+  }
+}
+
 export async function getProduct(id: string): Promise<Product | null> {
   try {
     const entry = await client.getEntry(id, { include: 2 });
