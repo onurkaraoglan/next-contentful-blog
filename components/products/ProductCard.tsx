@@ -25,7 +25,7 @@ export default function ProductCard({ product, tags }: { product: Product; tags:
 
   return (
     <div className="relative group h-full">
-      <Card className="relative flex h-full flex-col overflow-hidden border-border/70 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+      <Card className="relative flex h-full flex-col overflow-hidden border-border/70 bg-background shadow-sm transition-all duration-300 hover:border-foreground/20 hover:shadow-xl">
         <div className="relative h-48 w-full overflow-hidden">
           <Image
             src={src}
@@ -38,26 +38,26 @@ export default function ProductCard({ product, tags }: { product: Product; tags:
         </div>
         <CardHeader className="relative">
           <CardTitle>{fields.title}</CardTitle>
-          <CardDescription className="line-clamp-2">
+          <CardDescription className="line-clamp-4">
             {fields.description}
           </CardDescription>
         </CardHeader>
-        <CardContent className="relative flex-1 space-y-4">
+        <CardContent className="relative flex flex-1 flex-col gap-4">
           {fields.statistics && fields.statistics.length > 0 && (
-            <div className="flex flex-wrap gap-2">
+            <div className="flex min-h-6 flex-wrap gap-2 justifiy-evenly">
               {fields.statistics.slice(0, 3).map((statistic) => (
                 <ProductStatisticChip key={statistic.sys.id} statistic={statistic} />
               ))}
             </div>
           )}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex min-h-2 flex-wrap content-start gap-2">
             {tagNames.map((tag) => (
               <span key={tag} className="px-2 py-1 text-xs rounded-md bg-secondary text-secondary-foreground">
                 {tag}
               </span>
             ))}
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex min-h-2 flex-wrap content-start gap-2">
             {(fields.techStack || []).map((stack) => (
               <div key={stack} className="flex items-center gap-1 px-2 py-1 text-xs rounded-md bg-muted">
                 <Image

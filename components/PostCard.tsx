@@ -30,7 +30,7 @@ export default function PostCard(props: Props) {
   return (
     <div className="relative group">
       
-      <Card className="relative overflow-hidden border-border/70 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+      <Card className="relative flex h-full flex-col overflow-hidden border-border/70 bg-background shadow-sm transition-all duration-300 hover:border-foreground/20 hover:shadow-xl">
         <div className="relative h-48 w-full overflow-hidden">
         <Image
           src={src}
@@ -42,10 +42,10 @@ export default function PostCard(props: Props) {
       </div>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
-        <CardDescription>{fieldDescription}</CardDescription>
+        <CardDescription className="line-clamp-2">{fieldDescription}</CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="flex flex-wrap gap-2">
+      <CardContent className="flex-1">
+        <div className="flex min-h-12 flex-wrap content-start gap-2">
           {tags.map((tag) => (
             <span
               key={tag}

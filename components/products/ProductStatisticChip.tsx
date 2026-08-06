@@ -12,7 +12,6 @@ export function ProductStatisticChip({
       <span className="font-semibold text-foreground">
         {statistic.fields.value}
       </span>
-      <span className="text-muted-foreground">{statistic.fields.label}</span>
     </div>
   );
 }

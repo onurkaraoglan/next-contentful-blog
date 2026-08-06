@@ -257,18 +257,21 @@ export default async function Post({ params }: Props) {
         {relatedPosts.length > 0 && (
           <>
             <SectionHeading title="Other Posts" />
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:snap-none md:overflow-visible">
+              <div aria-hidden="true" className="w-4 snap-none md:hidden" />
               {relatedPosts.map((relatedPost) => (
-                <PostCard
-                  key={relatedPost.sys.id}
-                  id={relatedPost.sys.id}
-                  image={relatedPost.fields.image.fields}
-                  title={relatedPost.fields.title}
-                  fieldDescription={relatedPost.fields.description}
-                  metaTags={relatedPost.metadata.tags}
-                  tags={postTags}
-                />
+                <div key={relatedPost.sys.id} className="w-[75%] shrink-0 snap-start md:w-auto md:shrink">
+                  <PostCard
+                    id={relatedPost.sys.id}
+                    image={relatedPost.fields.image.fields}
+                    title={relatedPost.fields.title}
+                    fieldDescription={relatedPost.fields.description}
+                    metaTags={relatedPost.metadata.tags}
+                    tags={postTags}
+                  />
+                </div>
               ))}
+              <div aria-hidden="true" className="w-4 snap-none md:hidden" />
             </div>
           </>
         )}

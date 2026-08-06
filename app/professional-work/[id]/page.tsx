@@ -69,7 +69,11 @@ export default async function ProfessionalWorkDetailPage({ params }: Props) {
         {relatedProjects.length > 0 && (
           <>
             <SectionHeading title="Other Works" />
-            <ProjectGrid projects={relatedProjects} tags={tags} />
+            <ProjectGrid
+              projects={relatedProjects}
+              tags={tags}
+              mobileScrollable
+            />
           </>
         )}
         <div className="mx-auto mt-8 w-full max-w-sm">

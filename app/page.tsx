@@ -61,6 +61,7 @@ export default async function Home() {
         <ProductGrid
           products={products}
           tags={projectTags}
+          mobileScrollable
           heading={{
             title: "Latest Products",
             subTitle: "Recent extensions, mobile apps and web apps",
@@ -79,7 +80,11 @@ export default async function Home() {
             title="Latest Professional Work"
             subTitle="Recent projects delivered through my professional work"
           />
-          <ProjectGrid projects={professionalProjects} tags={projectTags} />
+          <ProjectGrid
+            projects={professionalProjects}
+            tags={projectTags}
+            mobileScrollable
+          />
           <div className="mx-auto mt-8 w-full max-w-sm">
             <Link href="/professional-work" className="w-full">
               <CtaButton variant="outline" className="w-full">

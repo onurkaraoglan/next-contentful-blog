@@ -70,6 +70,7 @@ export default async function ProductDetailPage({ params }: Props) {
           <ProductGrid
             products={relatedProducts}
             tags={tags}
+            mobileScrollable
             heading={{ title: `Other ${category.title}` }}
           />
         )}
