@@ -3,14 +3,17 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import slug from "slug";
 import {
+  type Product,
   getProduct,
   getProducts,
   getRelatedProducts,
 } from "@onur/data/api/product";
+import { getProductLandingPage } from "@onur/data/api/product-landing-page";
 import { getProjectTags } from "@onur/data/api/tag";
 import { getProductCategoryDetails } from "@onur/data/static/products";
 import { getTagNameById } from "@onur/lib/tag";
 import PortfolioDetail from "@onur/components/PortfolioDetail";
+import ProductLandingPage from "@onur/components/products/ProductLandingPage";
 import { ProductGrid } from "@onur/components/products/ProductGrid";
 import CtaButton from "@onur/components/ui/cta-button";
 
@@ -35,11 +38,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: `Products - ${product.fields.title}`, description: product.fields.description };
 }
 
+function ProductDetailContent({ product, tagNames }: { product: Product; tagNames: string[] }) {
+  return (
+    <PortfolioDetail
+      title={product.fields.title}
+      description={product.fields.description}
+      image={product.fields.image?.fields}
+      tags={tagNames}
+      techStack={product.fields.techStack}
+      url={product.fields.url}
+      webStoreUrl={product.fields.webStoreUrl}
+      appStoreUrl={product.fields.appStoreUrl}
+      googlePlayUrl={product.fields.googlePlayUrl}
+      statistics={product.fields.statistics}
+    />
+  );
+}
+
 export default async function ProductDetailPage({ params }: Props) {
-  const product = await getProduct(getEntryId((await params).id));
+  const routeId = (await params).id;
+  const entryId = getEntryId(routeId);
+  const product = await getProduct(entryId);
   if (!product) notFound();
 
-  const [tags, relatedProducts] = await Promise.all([
+  const [landingPage, tags, relatedProducts] = await Promise.all([
+    getProductLandingPage(entryId),
     getProjectTags(),
     getRelatedProducts(product.fields.category, product.sys.id),
   ]);
@@ -52,18 +75,15 @@ export default async function ProductDetailPage({ params }: Props) {
 
   return (
     <>
-      <PortfolioDetail
-        title={product.fields.title}
-        description={product.fields.description}
-        image={product.fields.image?.fields}
-        tags={tagNames}
-        techStack={product.fields.techStack}
-        url={product.fields.url}
-        webStoreUrl={product.fields.webStoreUrl}
-        appStoreUrl={product.fields.appStoreUrl}
-        googlePlayUrl={product.fields.googlePlayUrl}
-        statistics={product.fields.statistics}
-      />
+      {landingPage ? (
+        <ProductLandingPage
+          product={product}
+          landingPage={landingPage}
+          productRouteId={routeId}
+        />
+      ) : (
+        <ProductDetailContent product={product} tagNames={tagNames} />
+      )}
 
       <section className="mx-auto w-full max-w-5xl px-4 pb-20 md:px-0">
         {relatedProducts.length > 0 && (

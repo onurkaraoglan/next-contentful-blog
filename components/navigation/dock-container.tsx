@@ -83,7 +83,7 @@ export function DockContainer() {
   };
 
   return (
-    <div className="fixed bottom-8 left-0 right-0 z-50 flex justify-center">
+    <div id="global-dock" className="fixed bottom-8 left-0 right-0 z-50 flex justify-center">
       <Dock apps={apps} onAppClick={handleAppClick} openApps={openApps} />
     </div>
   );
