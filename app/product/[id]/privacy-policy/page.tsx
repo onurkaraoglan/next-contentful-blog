@@ -69,6 +69,7 @@ export default async function ProductPrivacyPolicyPage({ params }: Props) {
   return (
     <ProductLandingLegalPage
       product={product}
+      landingPage={landingPage}
       productRouteId={routeId}
       title="Privacy Policy"
       content={landingPage.fields.privacyPolicy}

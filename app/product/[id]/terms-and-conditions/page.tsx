@@ -69,6 +69,7 @@ export default async function ProductTermsAndConditionsPage({ params }: Props) {
   return (
     <ProductLandingLegalPage
       product={product}
+      landingPage={landingPage}
       productRouteId={routeId}
       title="Terms & Conditions"
       content={landingPage.fields.termsAndConditions}

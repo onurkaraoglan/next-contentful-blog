@@ -14,18 +14,7 @@ import {
 } from "@onur/data/api/product-landing-page";
 import CtaButton from "@onur/components/ui/cta-button";
 import ProductLandingFaq from "./ProductLandingFaq";
-import ProductLandingThemeToggle from "./ProductLandingThemeToggle";
-
-function ScrollNavLink({ href, label }: { href: string; label: string }) {
-  return (
-    <a
-      href={href}
-      className="text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground"
-    >
-      {label}
-    </a>
-  );
-}
+import ProductLandingHeader from "./ProductLandingHeader";
 
 function LandingSocialLink({
   href,
@@ -75,47 +64,18 @@ export default function ProductLandingPage({
       <div className="relative overflow-hidden bg-background">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.14),transparent_32%),radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_28%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_30%),radial-gradient(circle_at_top_right,rgba(255,255,255,0.04),transparent_24%)]" />
 
-        <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 pb-24 pt-6 md:px-8 md:pb-32 md:pt-8">
-          <header className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <Link href={`/product/${productRouteId}`} className="w-fit">
-              {logo?.file?.url ? (
-                <Image
-                  src={`https:${logo.file.url}`}
-                  alt={logo.description || landingPage.fields.title}
-                  width={140}
-                  height={48}
-                  className="h-10 w-auto object-contain md:h-12"
-                  unoptimized
-                />
-              ) : (
-                <span className="text-lg font-semibold tracking-tight">
-                  {landingPage.fields.productName}
-                </span>
-              )}
-            </Link>
+        <ProductLandingHeader
+          productRouteId={productRouteId}
+          productName={landingPage.fields.productName}
+          title={landingPage.fields.title}
+          logo={logo}
+          hasFaq={hasFaq}
+          hasPrivacyPolicy={hasPrivacyPolicy}
+          hasTermsAndConditions={hasTermsAndConditions}
+          mode="landing"
+        />
 
-            <nav className="flex flex-wrap items-center gap-x-5 gap-y-3">
-              {hasFaq && <ScrollNavLink href="#faq" label="FAQ" />}
-              <ScrollNavLink href="#contact" label="Contact" />
-              {hasPrivacyPolicy && (
-                <Link
-                  href={`/product/${productRouteId}/privacy-policy`}
-                  className="text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground"
-                >
-                  Privacy Policy
-                </Link>
-              )}
-              {hasTermsAndConditions && (
-                <Link
-                  href={`/product/${productRouteId}/terms-and-conditions`}
-                  className="text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground"
-                >
-                  Terms & Conditions
-                </Link>
-              )}
-              <ProductLandingThemeToggle />
-            </nav>
-          </header>
+        <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 pb-24 pt-28 md:px-8 md:pb-32 md:pt-32">
 
           <section className="grid flex-1 grid-cols-1 items-center gap-12 py-12 md:py-16 lg:grid-cols-[minmax(0,1fr)_28rem]">
             <div className="space-y-6">
