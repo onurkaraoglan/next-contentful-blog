@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import slug from "slug";
 import type { Metadata } from "next";
 import { getProduct, getProducts } from "@onur/data/api/product";
@@ -12,6 +12,8 @@ interface Props {
   params: Promise<{ id: string }>;
 }
 
+export const revalidate = 600;
+
 function getEntryId(paramId: string) {
   return paramId.split("-").at(-1) || "";
 }
@@ -24,15 +26,28 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = await getProduct(getEntryId((await params).id));
+  const routeId = (await params).id;
+  const entryId = getEntryId(routeId);
+  const product = await getProduct(entryId);
 
   if (!product) {
     return {};
   }
 
+  const landingPage = await getProductLandingPage(entryId);
+  const faviconUrl = landingPage?.fields.logo?.fields.file?.url;
+  const baseTitle = landingPage?.fields.title || product.fields.title;
+
   return {
-    title: `${product.fields.title} - Terms & Conditions`,
+    title: `${baseTitle} - Terms & Conditions`,
     description: `Terms and conditions for ${product.fields.title}`,
+    ...(faviconUrl
+      ? {
+          icons: {
+            icon: `https:${faviconUrl}`,
+          },
+        }
+      : {}),
   };
 }
 
@@ -48,7 +63,7 @@ export default async function ProductTermsAndConditionsPage({ params }: Props) {
   const landingPage = await getProductLandingPage(entryId);
 
   if (!landingPage || !hasContentfulRichTextContent(landingPage.fields.termsAndConditions)) {
-    notFound();
+    redirect(`/product/${routeId}`);
   }
 
   return (

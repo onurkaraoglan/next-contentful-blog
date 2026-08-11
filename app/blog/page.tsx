@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Onur Karaoğlan's blog page",
 };
 
-export const revalidate = 300; // Revalidate every 5 minutes
+export const revalidate = 600; // Revalidate every 10 minutes
 
 export default async function Blog() {
   const posts = await getPosts();

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: "Extensions, mobile apps and web apps built by Onur Karaoğlan",
 };
 
-export const revalidate = 30;
+export const revalidate = 300;
 
 const icons = {
   puzzle: Puzzle,

@@ -21,6 +21,8 @@ interface Props {
   params: Promise<{ id: string }>;
 }
 
+export const revalidate = 600;
+
 function getEntryId(paramId: string) {
   return paramId.split("-").at(-1) || "";
 }
@@ -33,9 +35,28 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = await getProduct(getEntryId((await params).id));
-  if (!product) return {};
-  return { title: `Products - ${product.fields.title}`, description: product.fields.description };
+  const routeId = (await params).id;
+  const entryId = getEntryId(routeId);
+  const product = await getProduct(entryId);
+
+  if (!product) {
+    return {};
+  }
+
+  const landingPage = await getProductLandingPage(entryId);
+  const faviconUrl = landingPage?.fields.logo?.fields.file?.url;
+
+  return {
+    title: landingPage?.fields.title || product.fields.title,
+    description: product.fields.description,
+    ...(faviconUrl
+      ? {
+          icons: {
+            icon: `https:${faviconUrl}`,
+          },
+        }
+      : {}),
+  };
 }
 
 function ProductDetailContent({ product, tagNames }: { product: Product; tagNames: string[] }) {

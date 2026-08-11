@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Professional projects delivered by Onur Karaoğlan",
 };
 
-export const revalidate = 30;
+export const revalidate = 300;
 
 export default async function ProfessionalWorkPage() {
   const [projects, tags] = await Promise.all([
