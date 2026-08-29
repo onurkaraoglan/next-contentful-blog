@@ -12,7 +12,7 @@ import { getProductLandingPage } from "@onur/data/api/product-landing-page";
 import { getProjectTags } from "@onur/data/api/tag";
 import { getProductCategoryDetails } from "@onur/data/static/products";
 import { getTagNameById } from "@onur/lib/tag";
-import PortfolioDetail from "@onur/components/PortfolioDetail";
+import ProductDetail from "@onur/components/ProductDetail";
 import ProductLandingPage from "@onur/components/products/ProductLandingPage";
 import { ProductGrid } from "@onur/components/products/ProductGrid";
 import CtaButton from "@onur/components/ui/cta-button";
@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 function ProductDetailContent({ product, tagNames }: { product: Product; tagNames: string[] }) {
   return (
-    <PortfolioDetail
+    <ProductDetail
       title={product.fields.title}
       description={product.fields.description}
       image={product.fields.image?.fields}
@@ -115,11 +115,14 @@ export default async function ProductDetailPage({ params }: Props) {
             heading={{ title: `Other ${category.title}` }}
           />
         )}
-        <div className="mx-auto mt-8 w-full max-w-sm">
+        <div className="mx-auto mt-8 flex w-full max-w-2xl flex-col gap-4 sm:flex-row">
           <CtaButton asChild variant="outline" className="w-full">
             <Link href={`/products/${category.id}`}>
               View All {category.title}
             </Link>
+          </CtaButton>
+          <CtaButton asChild variant="outline" className="w-full">
+            <Link href="/products">Other Products</Link>
           </CtaButton>
         </div>
       </section>

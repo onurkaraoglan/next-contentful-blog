@@ -7,12 +7,16 @@ import {
   Envelope,
 } from "react-bootstrap-icons";
 import type { ReactNode } from "react";
-import type { Product } from "@onur/data/api/product";
+import type { Product, ProductStatistic } from "@onur/data/api/product";
 import {
+  hasActivePrivacyPolicy,
+  hasActiveTermsAndConditions,
   parseProductLandingPageFaqItems,
   type ProductLandingPage,
 } from "@onur/data/api/product-landing-page";
 import CtaButton from "@onur/components/ui/cta-button";
+import { BuyMeACoffeeButton } from "@onur/components/ui/bmc-button";
+import DynamicLucideIcon from "./DynamicLucideIcon";
 import ProductLandingFaq from "./ProductLandingFaq";
 import ProductLandingHeader from "./ProductLandingHeader";
 
@@ -38,6 +42,38 @@ function LandingSocialLink({
   );
 }
 
+function ProductLandingStatistics({
+  statistics,
+}: {
+  statistics: ProductStatistic[];
+}) {
+  return (
+    <div
+      className="flex w-0 min-w-full flex-wrap gap-2 justify-evenly pb-4 "
+      aria-label="Product statistics"
+    >
+      {statistics.slice(0, 3).map((statistic) => (
+        <div
+          key={statistic.sys.id}
+          className="inline-flex items-center gap-1.5 rounded-lg pr-2.5 py-1.5 text-sm shadow-sm backdrop-blur"
+        >
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center text-foreground">
+            <DynamicLucideIcon
+              name={statistic.fields.icon}
+              className="h-4 w-4"
+            />
+          </span>
+          <span className="min-w-0">
+            <span className="font-semibold text-foreground">
+              {statistic.fields.value}
+            </span>
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function ProductLandingPage({
   product,
   landingPage,
@@ -49,8 +85,10 @@ export default function ProductLandingPage({
 }) {
   const faqItems = parseProductLandingPageFaqItems(landingPage.fields.faqItems);
   const hasFaq = faqItems.length > 0;
-  const hasPrivacyPolicy = Boolean(landingPage.fields.privacyPolicy);
-  const hasTermsAndConditions = Boolean(landingPage.fields.termsAndConditions);
+  const hasPrivacyPolicy = hasActivePrivacyPolicy(landingPage);
+  const hasTermsAndConditions = hasActiveTermsAndConditions(landingPage);
+  const statistics = product.fields.statistics ?? [];
+  const hasStatistics = statistics.length > 0;
   const logo = landingPage.fields.logo?.fields ?? product.fields.image?.fields;
   const heroImage = landingPage.fields.heroImage?.fields ?? product.fields.image?.fields;
   const hasPrimaryCta =
@@ -87,28 +125,32 @@ export default function ProductLandingPage({
                   {landingPage.fields.subtitle}
                 </p>
               )}
-              <div className="flex flex-wrap gap-3">
-                {hasPrimaryCta && (
-                  <CtaButton asChild>
-                    <Link href={landingPage.fields.primaryCtaUrl!}>
-                      {landingPage.fields.primaryCtaLabel}
-                    </Link>
+              <div className="inline-flex w-full md:w-auto md:max-w-full flex-col items-stretch gap-3">
+                {hasStatistics && <ProductLandingStatistics statistics={statistics} />}
+                <div className="flex w-full md:w-auto md:max-w-full justify-center flex-wrap gap-3">
+                  {hasPrimaryCta && (
+                    <CtaButton asChild>
+                      <Link href={landingPage.fields.primaryCtaUrl!}>
+                        {landingPage.fields.primaryCtaLabel}
+                      </Link>
+                    </CtaButton>
+                  )}
+                  <CtaButton variant="outline" asChild>
+                    <Link href="#contact">Get in Touch</Link>
                   </CtaButton>
-                )}
-                <CtaButton variant="outline" asChild>
-                  <Link href="#contact">Get in Touch</Link>
-                </CtaButton>
+                </div>
               </div>
             </div>
 
             {heroImage?.file?.url && (
-              <div className="overflow-hidden rounded-[2rem] border border-border/70 bg-card/60 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
                 <Image
                   src={`https:${heroImage.file.url}`}
                   alt={heroImage.description || landingPage.fields.title}
-                  width={896}
-                  height={672}
-                  className="h-full w-full object-cover"
+                  fill
+                  sizes="(min-width: 1024px) 28rem, 100vw"
+                  className="object-cover"
+                  loading="eager"
                   unoptimized
                 />
               </div>
@@ -126,8 +168,26 @@ export default function ProductLandingPage({
             </section>
           )}
 
+          <section id="support" className="scroll-mt-24 py-12 md:py-16">
+            <div className="rounded-2xl border border-border/70  bg-foreground/[0.06] p-6 shadow-sm backdrop-blur md:p-8">
+              <div className="grid items-center gap-6 grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto]">
+                <div className="space-y-3">
+                  <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
+                    Support
+                  </h2>
+                  <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                    {landingPage.fields.productName} is free to use. If it saves
+                    you time or makes your workflow a little easier, you can
+                    support future improvements with a small tip.
+                  </p>
+                </div>
+                <BuyMeACoffeeButton />
+              </div>
+            </div>
+          </section>
+
           <section id="contact" className="scroll-mt-24 py-12 md:py-16">
-            <div className="relative overflow-hidden rounded-[2rem] px-2 py-6 md:px-0">
+            <div className="relative overflow-hidden px-2 py-6 md:px-0">
 
               <div className="mx-auto max-w-3xl text-center">
                 <div className="space-y-4">

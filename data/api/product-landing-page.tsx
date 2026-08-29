@@ -29,7 +29,9 @@ export interface ProductLandingPage {
     };
     faqItems?: unknown;
     privacyPolicy?: unknown;
+    privacyPolicyIsActive?: boolean;
     termsAndConditions?: unknown;
+    termsAndConditionsIsActive?: boolean;
   };
 }
 
@@ -70,6 +72,22 @@ export function hasContentfulRichTextContent(value: unknown): boolean {
 
   const content = (value as { content?: unknown }).content;
   return Array.isArray(content) && content.length > 0;
+}
+
+export function hasActivePrivacyPolicy(landingPage: ProductLandingPage): boolean {
+  return (
+    landingPage.fields.privacyPolicyIsActive !== false &&
+    hasContentfulRichTextContent(landingPage.fields.privacyPolicy)
+  );
+}
+
+export function hasActiveTermsAndConditions(
+  landingPage: ProductLandingPage
+): boolean {
+  return (
+    landingPage.fields.termsAndConditionsIsActive !== false &&
+    hasContentfulRichTextContent(landingPage.fields.termsAndConditions)
+  );
 }
 
 export function renderContentfulRichText(value: unknown) {

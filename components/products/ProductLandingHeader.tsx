@@ -66,6 +66,8 @@ export default function ProductLandingHeader({
   }, []);
 
   const faqHref = mode === "landing" ? "#faq" : `/product/${productRouteId}#faq`;
+  const supportHref =
+    mode === "landing" ? "#support" : `/product/${productRouteId}#support`;
   const contactHref =
     mode === "landing" ? "#contact" : `/product/${productRouteId}#contact`;
 
@@ -77,18 +79,20 @@ export default function ProductLandingHeader({
     >
       <div className="mx-auto w-full max-w-6xl px-4 pt-4 md:px-8 md:pt-6">
         <header
-          className="flex items-center justify-between gap-4 rounded-full border border-border/70 bg-background/88 px-4 py-3 shadow-[0_10px_40px_rgba(0,0,0,0.08)] backdrop-blur md:px-6"
+          className="flex items-center justify-between gap-4 rounded-2xl border border-border/70 bg-background/88 px-4 py-3 shadow-[0_10px_40px_rgba(0,0,0,0.08)] backdrop-blur md:px-6"
         >
           <Link href={`/product/${productRouteId}`} className="min-w-0 shrink">
             {logo?.file?.url ? (
-              <Image
-                src={`https:${logo.file.url}`}
-                alt={logo.description || title}
-                width={140}
-                height={48}
-                className="h-10 w-auto max-w-[9rem] object-contain md:h-12 md:max-w-none"
-                unoptimized
-              />
+              <span className="relative block h-10 w-[9rem] md:h-12 md:w-[140px]">
+                <Image
+                  src={`https:${logo.file.url}`}
+                  alt={logo.description || title}
+                  fill
+                  sizes="(min-width: 768px) 140px, 144px"
+                  className="object-contain object-left"
+                  unoptimized
+                />
+              </span>
             ) : (
               <span className="block truncate text-lg font-semibold tracking-tight">
                 {productName}
@@ -109,6 +113,7 @@ export default function ProductLandingHeader({
 
           <nav className="hidden items-center gap-x-5 gap-y-3 md:flex md:justify-end">
             {hasFaq && <HeaderLink href={faqHref} label="FAQ" />}
+            <HeaderLink href={supportHref} label="Support" />
             <HeaderLink href={contactHref} label="Contact" />
             {hasPrivacyPolicy && (
               <HeaderLink

@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { getProduct, getProducts } from "@onur/data/api/product";
 import {
   getProductLandingPage,
-  hasContentfulRichTextContent,
+  hasActivePrivacyPolicy,
 } from "@onur/data/api/product-landing-page";
 import ProductLandingLegalPage from "@onur/components/products/ProductLandingLegalPage";
 
@@ -38,6 +38,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const faviconUrl = landingPage?.fields.logo?.fields.file?.url;
   const baseTitle = landingPage?.fields.title || product.fields.title;
 
+  if (!landingPage || !hasActivePrivacyPolicy(landingPage)) {
+    return {};
+  }
+
   return {
     title: `${baseTitle} - Privacy Policy`,
     description: `Privacy policy for ${product.fields.title}`,
@@ -62,7 +66,7 @@ export default async function ProductPrivacyPolicyPage({ params }: Props) {
 
   const landingPage = await getProductLandingPage(entryId);
 
-  if (!landingPage || !hasContentfulRichTextContent(landingPage.fields.privacyPolicy)) {
+  if (!landingPage || !hasActivePrivacyPolicy(landingPage)) {
     redirect(`/product/${routeId}`);
   }
 

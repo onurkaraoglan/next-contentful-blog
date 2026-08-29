@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { Product } from "@onur/data/api/product";
 import {
+  hasActivePrivacyPolicy,
+  hasActiveTermsAndConditions,
   parseProductLandingPageFaqItems,
   type ProductLandingPage,
   renderContentfulRichText,
@@ -24,8 +26,8 @@ export default function ProductLandingLegalPage({
   const body = renderContentfulRichText(content);
   const logo = landingPage.fields.logo?.fields ?? product.fields.image?.fields;
   const hasFaq = parseProductLandingPageFaqItems(landingPage.fields.faqItems).length > 0;
-  const hasPrivacyPolicy = Boolean(landingPage.fields.privacyPolicy);
-  const hasTermsAndConditions = Boolean(landingPage.fields.termsAndConditions);
+  const hasPrivacyPolicy = hasActivePrivacyPolicy(landingPage);
+  const hasTermsAndConditions = hasActiveTermsAndConditions(landingPage);
 
   return (
     <>
@@ -45,7 +47,7 @@ export default function ProductLandingLegalPage({
 
         <div className="mx-auto flex w-full max-w-4xl flex-col px-4 pb-24 pt-28 md:px-8 md:pb-32 md:pt-32">
 
-          <div className="rounded-[2rem] border border-border/70 bg-card/70 p-8 shadow-sm backdrop-blur md:p-12">
+          <div className="rounded-2xl border border-border/70 bg-card/70 p-8 shadow-sm backdrop-blur md:p-12">
             <div className="space-y-4">
               <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
                 Legal

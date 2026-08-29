@@ -21,8 +21,10 @@ export default function ProductLandingFaq({
             <span className="text-sm font-medium md:text-base">{item.question}</span>
             <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]:rotate-180" />
           </Accordion.Trigger>
-          <Accordion.Content className="overflow-hidden border-t border-border/70 px-5 pb-5 pt-4 text-sm leading-relaxed text-muted-foreground data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-            {item.answer}
+          <Accordion.Content className="overflow-hidden text-sm leading-relaxed text-muted-foreground data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+            <div className="border-t border-border/70 px-5 pb-5 pt-4">
+              {item.answer}
+            </div>
           </Accordion.Content>
         </Accordion.Item>
       ))}

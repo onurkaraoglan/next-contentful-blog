@@ -9,7 +9,7 @@ import {
 } from "@onur/data/api/project";
 import { getProjectTags } from "@onur/data/api/tag";
 import { getTagNameById } from "@onur/lib/tag";
-import PortfolioDetail from "@onur/components/PortfolioDetail";
+import ProductDetail from "@onur/components/ProductDetail";
 import ProjectGrid from "@onur/components/ProjectGrid";
 import { SectionHeading } from "@onur/components/ui/section-heading";
 import CtaButton from "@onur/components/ui/cta-button";
@@ -54,7 +54,7 @@ export default async function ProfessionalWorkDetailPage({ params }: Props) {
 
   return (
     <>
-      <PortfolioDetail
+      <ProductDetail
         title={project.fields.title}
         description={project.fields.description}
         image={project.fields.image?.fields}

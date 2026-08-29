@@ -68,14 +68,18 @@ export default async function ProductsPage() {
 
         <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:snap-none md:overflow-visible">
           <div aria-hidden="true" className="w-4 snap-none md:hidden" />
-          {productCategories.map((category) => (
-            <div key={category.id} className="w-[75%] shrink-0 snap-start md:h-full md:w-auto md:shrink">
-              <CategoryCard
-                category={category}
-                count={products.filter((product) => product.fields.category === category.id).length}
+          {productCategories.filter((category) => {
+            const count = products.filter((product) => product.fields.category === category.id).length;
+            return count > 0;
+          }).map((category, count) => {
+            return (
+              <div key={category.id} className="w-[75%] shrink-0 snap-start md:h-full md:w-auto md:shrink">
+                <CategoryCard
+                  category={category}
+                  count={count}
               />
             </div>
-          ))}
+          )})}
           <div aria-hidden="true" className="w-4 snap-none md:hidden" />
         </div>
       </div>

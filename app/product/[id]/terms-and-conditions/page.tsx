@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { getProduct, getProducts } from "@onur/data/api/product";
 import {
   getProductLandingPage,
-  hasContentfulRichTextContent,
+  hasActiveTermsAndConditions,
 } from "@onur/data/api/product-landing-page";
 import ProductLandingLegalPage from "@onur/components/products/ProductLandingLegalPage";
 
@@ -38,6 +38,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const faviconUrl = landingPage?.fields.logo?.fields.file?.url;
   const baseTitle = landingPage?.fields.title || product.fields.title;
 
+  if (!landingPage || !hasActiveTermsAndConditions(landingPage)) {
+    return {};
+  }
+
   return {
     title: `${baseTitle} - Terms & Conditions`,
     description: `Terms and conditions for ${product.fields.title}`,
@@ -62,7 +66,7 @@ export default async function ProductTermsAndConditionsPage({ params }: Props) {
 
   const landingPage = await getProductLandingPage(entryId);
 
-  if (!landingPage || !hasContentfulRichTextContent(landingPage.fields.termsAndConditions)) {
+  if (!landingPage || !hasActiveTermsAndConditions(landingPage)) {
     redirect(`/product/${routeId}`);
   }
 

@@ -18,7 +18,7 @@ interface Props {
   statistics?: ProductStatistic[];
 }
 
-export default function PortfolioDetail({
+export default function ProductDetail({
   title,
   description,
   image,

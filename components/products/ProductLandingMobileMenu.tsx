@@ -90,6 +90,8 @@ export default function ProductLandingMobileMenu({
 
   const closeMenu = () => setIsOpen(false);
   const faqHref = mode === "landing" ? "#faq" : `/product/${productRouteId}#faq`;
+  const supportHref =
+    mode === "landing" ? "#support" : `/product/${productRouteId}#support`;
   const contactHref =
     mode === "landing" ? "#contact" : `/product/${productRouteId}#contact`;
 
@@ -139,6 +141,7 @@ export default function ProductLandingMobileMenu({
 
               <nav className="mt-10 flex flex-col gap-6">
                 {hasFaq && <DrawerLink href={faqHref} label="FAQ" onClick={closeMenu} />}
+                <DrawerLink href={supportHref} label="Support" onClick={closeMenu} />
                 <DrawerLink href={contactHref} label="Contact" onClick={closeMenu} />
                 {hasPrivacyPolicy && (
                   <DrawerLink
