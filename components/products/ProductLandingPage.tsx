@@ -149,7 +149,7 @@ export default function ProductLandingPage({
                   alt={heroImage.description || landingPage.fields.title}
                   fill
                   sizes="(min-width: 1024px) 28rem, 100vw"
-                  className="object-cover"
+                  className="object-cover object-top"
                   loading="eager"
                   unoptimized
                 />
