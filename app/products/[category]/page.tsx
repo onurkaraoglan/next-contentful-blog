@@ -16,6 +16,8 @@ interface Props {
   params: Promise<{ category: string }>;
 }
 
+export const revalidate = 300;
+
 function isProductCategory(category: string): category is ProductCategory {
   return PRODUCT_CATEGORIES.includes(category as ProductCategory);
 }
