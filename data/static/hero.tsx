@@ -13,10 +13,12 @@ export const heroData = {
     body: `Hey! I'm Onur Karaoğlan, a Full Stack Engineer from Ankara, Turkey. I love creating web and mobile apps that work smoothly behind the scenes and feel great for people to use. I enjoy helping teams, sharing what I know and taking on new challenges along the way`,
     socialUrls: [
       {
+        label: "LinkedIn profile",
         url: "https://www.linkedin.com/in/onurkaraoglan/",
         icon: <FaLinkedinIn size={20} />,
       },
       {
+        label: "GitHub profile",
         url: "https://github.com/onurkaraoglan",
         icon: <FaGithub size={20} />,
       },
@@ -28,4 +30,3 @@ export const heroData = {
     },
   },
 };
-

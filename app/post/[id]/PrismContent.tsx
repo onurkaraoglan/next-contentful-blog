@@ -23,4 +23,3 @@ export default function PrismContent({ post, children }: Props) {
 
   return <div ref={contentRef}>{children}</div>;
 }
-

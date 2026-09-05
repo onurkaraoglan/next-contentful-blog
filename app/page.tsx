@@ -67,11 +67,11 @@ export default async function Home() {
             subTitle: "Recent extensions, mobile apps and web apps",
           }}
           actionButton={
-            <Link href="/products" className="w-full max-w-sm">
-              <CtaButton variant="outline" className="w-full">
+            <CtaButton asChild variant="outline" className="w-full max-w-sm">
+              <Link href="/products">
                 View All Products
-              </CtaButton>
-            </Link>
+              </Link>
+            </CtaButton>
           }
         />
 
@@ -86,11 +86,11 @@ export default async function Home() {
             mobileScrollable
           />
           <div className="mx-auto mt-8 w-full max-w-sm">
-            <Link href="/professional-work" className="w-full">
-              <CtaButton variant="outline" className="w-full">
+            <CtaButton asChild variant="outline" className="w-full">
+              <Link href="/professional-work">
                 View All Professional Work
-              </CtaButton>
-            </Link>
+              </Link>
+            </CtaButton>
           </div>
         </section>
 
@@ -111,11 +111,11 @@ export default async function Home() {
             subTitle: "Recent articles and thoughts",
           }}
           actionButton={
-            <Link href="/blog" className="w-full">
-              <CtaButton variant="outline" className="w-full">
+            <CtaButton asChild variant="outline" className="w-full">
+              <Link href="/blog">
                 View All Posts
-              </CtaButton>
-            </Link>
+              </Link>
+            </CtaButton>
           }
         />
       </div>

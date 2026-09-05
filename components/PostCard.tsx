@@ -57,16 +57,15 @@ export default function PostCard(props: Props) {
         </div>
       </CardContent>
       <CardFooter>
-        <Link
-          aria-label={slug(title)}
-          href="/post/[id]"
-          as={`/post/${slug(title)}-${id}`}
-          className="w-full"
-        >
-          <CtaButton className="w-full">
+        <CtaButton asChild className="w-full">
+          <Link
+            aria-label={`Read more about ${title}`}
+            href="/post/[id]"
+            as={`/post/${slug(title)}-${id}`}
+          >
             Read More
-          </CtaButton>
-        </Link>
+          </Link>
+        </CtaButton>
       </CardFooter>
       </Card>
     </div>

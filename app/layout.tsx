@@ -1,5 +1,4 @@
 import "@onur/styles/globals.css";
-import "@onur/styles/prism.css";
 import { ThemeProvider } from "next-themes";
 import { DockContainer } from "@onur/components/navigation/dock-container";
 import type { Metadata, Viewport } from "next";
@@ -48,4 +47,3 @@ export default function RootLayout({
     </html>
   );
 }
-

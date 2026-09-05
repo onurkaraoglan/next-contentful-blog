@@ -37,7 +37,9 @@ export function HeroProfileCard() {
                     ]}
                   />
                   <div className="flex flex-col">
-                    <CardTitle>{heroData.profileCard.title}</CardTitle>
+                    <CardTitle asChild>
+                      <p>{heroData.profileCard.title}</p>
+                    </CardTitle>
                     <CardDescription>
                       {heroData.profileCard.subTitle}
                     </CardDescription>
@@ -59,6 +61,9 @@ export function HeroProfileCard() {
                     className="group inline-block"
                     target="_blank"
                     href={social.url}
+                    aria-label={social.label}
+                    title={social.label}
+                    rel="noopener noreferrer"
                   >
                     <Button className="shadow-[-2px_-2px_#00000069_inset] transition-all group-hover/card:shadow-[-1px_-1px_#00000069_inset]">
                       {social.icon}
@@ -73,4 +78,3 @@ export function HeroProfileCard() {
     </div>
   );
 }
-

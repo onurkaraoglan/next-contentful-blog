@@ -16,7 +16,7 @@ import {
 } from "@onur/data/api/product-landing-page";
 import CtaButton from "@onur/components/ui/cta-button";
 import { BuyMeACoffeeButton } from "@onur/components/ui/bmc-button";
-import DynamicLucideIcon from "./DynamicLucideIcon";
+import ProductStatisticIcon from "./ProductStatisticIcon";
 import ProductLandingFaq from "./ProductLandingFaq";
 import ProductLandingHeader from "./ProductLandingHeader";
 
@@ -58,7 +58,7 @@ function ProductLandingStatistics({
           className="inline-flex items-center gap-1.5 rounded-lg pr-2.5 py-1.5 text-sm shadow-sm backdrop-blur"
         >
           <span className="flex h-8 w-8 shrink-0 items-center justify-center text-foreground">
-            <DynamicLucideIcon
+            <ProductStatisticIcon
               name={statistic.fields.icon}
               className="h-4 w-4"
             />
@@ -150,7 +150,8 @@ export default function ProductLandingPage({
                   fill
                   sizes="(min-width: 1024px) 28rem, 100vw"
                   className="object-cover object-top"
-                  loading="eager"
+                  preload
+                  fetchPriority="high"
                   unoptimized
                 />
               </div>

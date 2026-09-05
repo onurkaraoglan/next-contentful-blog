@@ -9,6 +9,10 @@ export const BuyMeACoffeeButton: React.FC = () => {
       <img
         src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
         alt="Buy Me a Coffee"
+        width={217}
+        height={60}
+        loading="lazy"
+        decoding="async"
         className="h-14 w-auto"
       />
     </a>
