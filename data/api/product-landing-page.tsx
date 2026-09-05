@@ -16,7 +16,7 @@ export interface ProductLandingPage {
   };
   fields: {
     productName: string;
-    product: Product;
+    product: Product | Product[];
     title: string;
     subtitle?: string;
     primaryCtaLabel?: string;
@@ -33,6 +33,16 @@ export interface ProductLandingPage {
     termsAndConditions?: unknown;
     termsAndConditionsIsActive?: boolean;
   };
+}
+
+function getLandingPageProductIds(landingPage: ProductLandingPage): string[] {
+  const products = Array.isArray(landingPage.fields.product)
+    ? landingPage.fields.product
+    : [landingPage.fields.product];
+
+  return products
+    .map((product) => product?.sys?.id)
+    .filter(isNonEmptyString);
 }
 
 function isNonEmptyString(value: unknown): value is string {
@@ -177,5 +187,31 @@ export async function getProductLandingPage(
     return ((entries.items || [])[0] as ProductLandingPage | undefined) ?? null;
   } catch {
     return null;
+  }
+}
+
+export async function getProductLandingPageProductIds(
+  productIds: string[]
+): Promise<Set<string>> {
+  const uniqueProductIds = [...new Set(productIds)].filter(isNonEmptyString);
+  if (uniqueProductIds.length === 0) {
+    return new Set();
+  }
+
+  try {
+    const entries = await client.getEntries({
+      content_type: "productLandingPage",
+      include: 1,
+      limit: uniqueProductIds.length,
+      "fields.product.sys.id[in]": uniqueProductIds.join(","),
+    });
+
+    return new Set(
+      ((entries.items || []) as ProductLandingPage[])
+        .flatMap(getLandingPageProductIds)
+        .filter(isNonEmptyString)
+    );
+  } catch {
+    return new Set();
   }
 }

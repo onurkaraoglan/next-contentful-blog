@@ -16,12 +16,27 @@ import {
 import  CtaButton  from "@onur/components/ui/cta-button";
 import { ProductStatisticChip } from "./ProductStatisticChip";
 
-export default function ProductCard({ product, tags }: { product: Product; tags: Tag }) {
+export default function ProductCard({
+  product,
+  tags,
+  opensDetailInNewTab = false,
+}: {
+  product: Product;
+  tags: Tag;
+  opensDetailInNewTab?: boolean;
+}) {
   const { fields, metadata, sys } = product;
   const src = `https:${fields.image.fields.file.url}`;
   const tagNames = metadata.tags
     .map((tag) => getTagNameById(tags.items, tag.sys.id))
     .filter((tag): tag is string => Boolean(tag));
+  const detailHref = `/product/${slug(fields.title)}-${sys.id}`;
+  const hasStoreUrl = Boolean(fields.webStoreUrl || fields.appStoreUrl || fields.googlePlayUrl);
+  const shouldLinkDirectlyToProductUrl =
+    fields.category === "web-apps" && Boolean(fields.url) && !hasStoreUrl;
+  const ctaHref = shouldLinkDirectlyToProductUrl ? fields.url! : detailHref;
+  const shouldOpenCtaInNewTab =
+    shouldLinkDirectlyToProductUrl || opensDetailInNewTab;
 
   return (
     <div className="relative group h-full">
@@ -74,9 +89,16 @@ export default function ProductCard({ product, tags }: { product: Product; tags:
           </div>
         </CardContent>
         <CardFooter className="relative">
-          <Link href={`/product/${slug(fields.title)}-${sys.id}`} className="w-full">
-            <CtaButton className="w-full">View Details</CtaButton>
-          </Link>
+          <CtaButton asChild className="w-full">
+            <Link
+              href={ctaHref}
+              {...(shouldOpenCtaInNewTab
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+            >
+              View Details
+            </Link>
+          </CtaButton>
         </CardFooter>
       </Card>
     </div>

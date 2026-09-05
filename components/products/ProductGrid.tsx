@@ -1,12 +1,13 @@
 import type { ReactNode } from "react";
 import type { Product } from "@onur/data/api/product";
+import { getProductLandingPageProductIds } from "@onur/data/api/product-landing-page";
 import type { Tag } from "@onur/data/api/tag";
 import { EmptyState } from "@onur/components/ui/empty-state";
 import { SectionHeading } from "@onur/components/ui/section-heading";
 import { cn } from "@onur/lib/utils";
 import ProductCard from "./ProductCard";
 
-export function ProductGrid({
+export async function ProductGrid({
   products,
   tags,
   heading,
@@ -21,6 +22,13 @@ export function ProductGrid({
   mobileScrollable?: boolean;
   emptyMessage?: string;
 }) {
+  const productIdsWithLandingPages =
+    products.length > 0
+      ? await getProductLandingPageProductIds(
+          products.map((product) => product.sys.id)
+        )
+      : new Set<string>();
+
   return (
     <div>
       {heading && (
@@ -45,7 +53,11 @@ export function ProductGrid({
                 mobileScrollable && "w-[75%] shrink-0 snap-start md:w-auto md:shrink"
               )}
             >
-              <ProductCard product={product} tags={tags} />
+              <ProductCard
+                product={product}
+                tags={tags}
+                opensDetailInNewTab={productIdsWithLandingPages.has(product.sys.id)}
+              />
             </div>
           ))}
           {mobileScrollable && <div aria-hidden="true" className="w-4 snap-none md:hidden" />}
